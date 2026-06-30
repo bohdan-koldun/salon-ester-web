@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLeadForm } from '../lib/useLeadForm';
-import { stats } from '../lib/config';
+import { contacts } from '../lib/config';
+import { track } from '../lib/tracking';
 
 interface Props {
   open: boolean;
@@ -59,7 +60,7 @@ const LeadModal: React.FC<Props> = ({
             <div className="form-success__icon">✓</div>
             <h3>Дякуємо{form.name ? `, ${form.name}` : ''}!</h3>
             <p className="modal__sub">
-              Ми зателефонуємо протягом {stats.callbackMinutes} хвилин.
+              Ми звʼяжемося з вами найближчим часом.
             </p>
           </div>
         ) : (
@@ -117,6 +118,39 @@ const LeadModal: React.FC<Props> = ({
             </form>
 
             {footnote && <p className="modal__footnote">{footnote}</p>}
+
+            <div className="modal__direct">
+              <div className="modal__direct-label">
+                або зв'яжіться напряму:
+              </div>
+              <div className="modal__direct-links">
+                <a
+                  href={`tel:${contacts.phone1Tel}`}
+                  className="modal__direct-phone"
+                  onClick={() => track('phone_click', { source: 'popup' })}
+                >
+                  {contacts.phone1}
+                </a>
+                <a
+                  href={contacts.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    track('messenger_click', { channel: 'telegram' })
+                  }
+                >
+                  Telegram
+                </a>
+                <a
+                  href={contacts.viber}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => track('messenger_click', { channel: 'viber' })}
+                >
+                  Viber
+                </a>
+              </div>
+            </div>
           </>
         )}
       </div>

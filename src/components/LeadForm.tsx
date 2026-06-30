@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { serviceOptions, writeReviewUrl, stats } from '../lib/config';
+import { serviceOptions, writeReviewUrl } from '../lib/config';
 import { useLeadForm } from '../lib/useLeadForm';
 import { PREFILL_EVENT, type FormPrefill } from '../lib/scroll';
 
@@ -33,7 +33,7 @@ const LeadForm: React.FC = () => {
           <div className="form-success">
             <div className="form-success__icon">✓</div>
             <h3>Дякуємо, {form.name || 'друже'}!</h3>
-            <p>Ми зателефонуємо протягом {stats.callbackMinutes} хвилин.</p>
+            <p>Ми звʼяжемося з вами найближчим часом.</p>
             <div className="form-success__divider">Були у нас раніше?</div>
             <a
               className="btn btn--ghost"
@@ -47,7 +47,7 @@ const LeadForm: React.FC = () => {
         ) : (
           <>
             <div className="section__head">
-              <h2>Розрахуйте вартість штор за 2 хвилини</h2>
+              <h2>Розрахуйте вартість ваших штор</h2>
               <p>
                 Залиште контакт — ми зателефонуємо та допоможемо підібрати
                 рішення під ваш інтер'єр та бюджет.

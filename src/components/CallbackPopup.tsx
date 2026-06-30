@@ -1,6 +1,5 @@
 import React from 'react';
 import LeadModal from './LeadModal';
-import { stats } from '../lib/config';
 
 interface Props {
   open: boolean;
@@ -14,7 +13,7 @@ const CallbackPopup: React.FC<Props> = ({ open, onClose }) => (
     formName="Замовити дзвінок"
     title="Замовити дзвінок"
     buttonLabel="Передзвоніть мені"
-    footnote={`Зателефонуємо протягом ${stats.callbackMinutes} хвилин`}
+    footnote="Зателефонуємо вам найближчим часом"
   />
 );
 

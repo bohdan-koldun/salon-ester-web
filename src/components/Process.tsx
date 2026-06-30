@@ -6,7 +6,7 @@ const Process: React.FC = () => {
   const steps = [
     {
       title: 'Заявка',
-      text: `Залишаєте заявку — передзвонимо за ${stats.callbackMinutes} хвилин.`,
+      text: 'Залишаєте заявку — і ми передзвонимо вам, щоб узгодити деталі.',
     },
     {
       title: 'Дизайнер',

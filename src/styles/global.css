@@ -1121,6 +1121,45 @@ h3 {
   margin-top: 12px;
 }
 
+/* Прямі контакти — «або зв'яжіться напряму» */
+.modal__direct {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--c-border);
+  text-align: center;
+}
+
+.modal__direct-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--c-text-muted);
+  margin-bottom: 12px;
+}
+
+.modal__direct-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 20px;
+}
+
+.modal__direct-links a {
+  color: var(--c-accent);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.modal__direct-links a:hover {
+  color: var(--c-accent-h);
+}
+
+.modal__direct-phone {
+  font-size: 18px;
+  font-weight: 600 !important;
+}
+
 /* ── Utilities ── */
 .sr-only {
   position: absolute;
