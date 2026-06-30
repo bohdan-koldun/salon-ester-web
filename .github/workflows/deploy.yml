@@ -1,0 +1,75 @@
+name: Deploy to Hosting Ukraine
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: Deploy env
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'npm'
+
+      - name: Send start notification
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          args: "⏳ Естер: деплой стартонув [${{ github.event_name }}]"
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Build Gatsby
+        run: npm run build
+        env:
+          GATSBY_GA_ID: ${{ secrets.GATSBY_GA_ID }}
+          GATSBY_GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          GATSBY_GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
+
+      - name: Send build fail notification
+        if: failure()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          args: "❌ Естер: білд не зібрався"
+
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Generate tg-secrets.php
+        run: |
+          cat > tg-secrets.php <<'PHPEOF'
+          <?php
+          return [
+              'bot_token'    => '${{ secrets.TELEGRAM_BOT_TOKEN }}',
+              'chat_id'      => '${{ secrets.TELEGRAM_CHAT_ID }}',
+              'lead_chat_id' => '${{ secrets.LEAD_TELEGRAM_CHAT_ID }}',
+              'lead_email'   => '${{ secrets.LEAD_EMAIL }}',
+          ];
+          PHPEOF
+
+      - name: Upload tg-secrets.php (above www)
+        run: |
+          lftp -c "open -u ${{ secrets.FTP_USER }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }}; put tg-secrets.php -o tg-secrets.php; quit"
+
+      - name: Upload to FTP
+        run: |
+          lftp -c "open -u ${{ secrets.FTP_USER }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }}; mirror -R --delete --verbose --parallel=10 --use-pget-n=5 public www; quit"
+
+      - name: Send success notification
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          args: "✅ Естер: задеплоїлось успішно"

@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Gatsby build output
+public/
+.cache/
+
+# Env / secrets
+.env
+.env.*
+tg-secrets.php
+
+# OS / editor
+.DS_Store
+*.log
+.idea/
+.vscode/
+
+# TypeScript
+*.tsbuildinfo
