@@ -16,5 +16,9 @@ tg-secrets.php
 .idea/
 .vscode/
 
+# Claude Code — особисті локальні оверрайди (спільні файли .claude/ комітимо)
+.claude/settings.local.json
+CLAUDE.local.md
+
 # TypeScript
 *.tsbuildinfo
