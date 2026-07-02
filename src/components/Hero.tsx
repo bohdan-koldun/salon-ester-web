@@ -7,7 +7,7 @@ const Hero: React.FC = () => (
   <section className="hero" id="hero">
     <div className="hero__bg">
       <StaticImage
-        src="../images/hero.jpg"
+        src="../images/hero.png"
         alt="Інтер'єр зі шторами на замовлення"
         layout="fullWidth"
         loading="eager"
