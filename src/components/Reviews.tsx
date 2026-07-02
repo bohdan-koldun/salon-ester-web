@@ -1,42 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { google, writeReviewUrl } from '../lib/config';
-
-interface Review {
-  author: string;
-  avatar?: string;
-  rating: number;
-  text: string;
-  date: string;
-}
-
-interface ReviewsData {
-  rating: number;
-  count: number;
-  reviews: Review[];
-}
-
-const CACHE_KEY = 'ester_reviews_v1';
-const TTL = 24 * 60 * 60 * 1000;
-
-function readCache(): ReviewsData | null {
-  try {
-    const raw = localStorage.getItem(CACHE_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw) as { ts: number; data: ReviewsData };
-    if (Date.now() - parsed.ts > TTL) return null;
-    return parsed.data;
-  } catch {
-    return null;
-  }
-}
-
-function writeCache(data: ReviewsData) {
-  try {
-    localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data }));
-  } catch {
-    /* ignore */
-  }
-}
+import React, { useState } from 'react';
+import { writeReviewUrl } from '../lib/config';
+import { useGooglePlace } from '../lib/useGooglePlace';
 
 const Stars: React.FC<{ rating: number }> = ({ rating }) => (
   <span className="stars" aria-label={`${rating} з 5`}>
@@ -44,45 +8,29 @@ const Stars: React.FC<{ rating: number }> = ({ rating }) => (
   </span>
 );
 
+const Avatar: React.FC<{ author: string; src?: string }> = ({
+  author,
+  src,
+}) => {
+  const [failed, setFailed] = useState(false);
+
+  if (!src || failed) {
+    return <>{author.charAt(0)}</>;
+  }
+
+  return (
+    <img
+      src={src}
+      alt={author}
+      loading="lazy"
+      referrerPolicy="no-referrer"
+      onError={() => setFailed(true)}
+    />
+  );
+};
+
 const Reviews: React.FC = () => {
-  const [data, setData] = useState<ReviewsData | null>(null);
-
-  useEffect(() => {
-    const cached = readCache();
-    if (cached) {
-      setData(cached);
-      return;
-    }
-    if (!google.mapsApiKey || !google.placeId) return;
-
-    const url = `https://places.googleapis.com/v1/places/${google.placeId}?languageCode=uk`;
-    fetch(url, {
-      headers: {
-        'X-Goog-Api-Key': google.mapsApiKey,
-        'X-Goog-FieldMask': 'rating,userRatingCount,reviews',
-      },
-    })
-      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-      .then((json) => {
-        const reviews: Review[] = (json.reviews ?? []).map((rev: any) => ({
-          author: rev.authorAttribution?.displayName ?? 'Клієнт',
-          avatar: rev.authorAttribution?.photoUri,
-          rating: rev.rating ?? 5,
-          text: rev.text?.text ?? rev.originalText?.text ?? '',
-          date: rev.relativePublishTimeDescription ?? '',
-        }));
-        const result: ReviewsData = {
-          rating: json.rating ?? 5,
-          count: json.userRatingCount ?? reviews.length,
-          reviews,
-        };
-        setData(result);
-        writeCache(result);
-      })
-      .catch(() => {
-        /* fallback нижче */
-      });
-  }, []);
+  const data = useGooglePlace();
 
   return (
     <section className="section section--alt" id="reviews">
@@ -104,11 +52,7 @@ const Reviews: React.FC = () => {
                 <article className="review-card" key={i}>
                   <div className="review-card__head">
                     <div className="review-card__avatar">
-                      {r.avatar ? (
-                        <img src={r.avatar} alt={r.author} loading="lazy" />
-                      ) : (
-                        r.author.charAt(0)
-                      )}
+                      <Avatar author={r.author} src={r.avatar} />
                     </div>
                     <div>
                       <div className="review-card__name">{r.author}</div>
