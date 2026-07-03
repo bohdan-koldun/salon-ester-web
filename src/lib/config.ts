@@ -17,16 +17,16 @@ export const stats = {
 
 // Контактні дані
 export const contacts = {
-  phone1: '+380 67 123 45 67',
-  phone2: '+380 50 123 45 67',
+  phone1: '+380972402303',
+  phone2: '',
   // tel: формат — лише цифри та +
-  phone1Tel: '+380671234567',
-  phone2Tel: '+380501234567',
+  phone1Tel: '+380972402303',
+  phone2Tel: '',
   address: 'м. Київ, вул. Прикладна, 1',
   schedule: 'Пн–Пт 10:00–19:00 · Сб–Нд 11:00–17:00',
   email: 'info@salon-ester.com.ua',
-  viber: 'viber://chat?number=%2B380671234567',
-  telegram: 'https://t.me/salon_ester',
+  viber: 'viber://chat?number=%2B380972402303',
+  telegram: 'https://t.me/+380972402303',
   // Google Maps embed: вставте координати/адресу салону
   mapEmbed:
     'https://www.google.com/maps?q=%D0%9A%D0%B8%D1%97%D0%B2&output=embed',
