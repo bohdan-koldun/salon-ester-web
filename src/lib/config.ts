@@ -4,8 +4,8 @@
 export const site = {
   name: 'Естер',
   tagline: 'салон штор',
-  domain: 'salon-ester.com.ua',
-  url: 'https://salon-ester.com.ua',
+  domain: 'estershtory.kyiv.ua',
+  url: 'https://estershtory.kyiv.ua',
 };
 
 // Числа для текстів
@@ -22,14 +22,14 @@ export const contacts = {
   // tel: формат — лише цифри та +
   phone1Tel: '+380972402303',
   phone2Tel: '',
-  address: 'м. Київ, вул. Прикладна, 1',
-  schedule: 'Пн–Пт 10:00–19:00 · Сб–Нд 11:00–17:00',
+  address: 'м. Київ, проспект Степана Бандери, 34а, гіпермаркет меблів MARGO',
+  schedule: 'Пн–Пт 10:00–19:00 · Сб–Нд 10:00–19:00',
   email: 'info@salon-ester.com.ua',
   viber: 'viber://chat?number=%2B380972402303',
   telegram: 'https://t.me/+380972402303',
   // Google Maps embed: вставте координати/адресу салону
   mapEmbed:
-    'https://www.google.com/maps?q=%D0%9A%D0%B8%D1%97%D0%B2&output=embed',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d65312.33145699416!2d30.485653529010673!3d50.50986447804213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4cf007145cff1%3A0xa5249350f032d0c0!2z0KHQsNC70L7QvSDRiNGC0L7RgCDCq9CV0YHRgtC10YDCuw!5e1!3m2!1sen!2sua!4v1783113479781!5m2!1sen!2sua',
 };
 
 // Акція
