@@ -62,37 +62,37 @@ export const services: Service[] = [
     key: 'curtains',
     title: 'Штори та ламбрекени',
     desc: "Індивідуальний пошив будь-якої складності під ваш стиль та інтер'єр.",
-    image: 'service-curtains.jpg',
+    image: 'service-curtains.png',
   },
   {
     key: 'roller',
     title: 'Рулонні штори',
     desc: 'Практичне рішення для кухні, офісу чи балкона. Захист від сонця та стиль.',
-    image: 'service-roller.jpg',
+    image: 'service-roller.png',
   },
   {
     key: 'roman',
     title: 'Римські штори',
     desc: 'Елегантні тканинні панелі з рівними складками. Ідеально для невеликих вікон.',
-    image: 'service-roman.jpg',
+    image: 'service-roman.png',
   },
   {
     key: 'blinds',
     title: 'Жалюзі',
     desc: 'Дерев’яні та алюмінієві. Довговічні, прості в догляді.',
-    image: 'service-blinds.jpg',
+    image: 'service-blinds.png',
   },
   {
     key: 'cornices',
     title: 'Карнизи та монтаж',
     desc: 'Підбір, доставка та встановлення. Металеві, дерев’яні, профільні.',
-    image: 'service-cornices.jpg',
+    image: 'service-cornices.png',
   },
   {
     key: 'textile',
     title: 'Текстиль для дому',
     desc: 'Покривала, подушки, скатертини, чохли — в єдиному стилі зі шторами.',
-    image: 'service-textile.jpg',
+    image: 'service-textile.png',
   },
 ];
 
@@ -100,11 +100,11 @@ export const services: Service[] = [
 export const gallery: string[] = [
   'work-1.jpg',
   'work-2.jpg',
-  'work-3.jpg',
+  'work-3.png',
   'work-4.jpg',
   'work-5.jpg',
   'work-6.jpg',
-  'work-7.jpg',
+  'work-7.png',
   'work-8.jpg',
   'work-9.jpg',
 ];
