@@ -44,11 +44,11 @@ const Header: React.FC<Props> = ({ onCallback }) => {
 
         <div className="header__right">
           <a
-            href={`tel:${contacts.phone1Tel}`}
+            href={`tel:${contacts.phoneTel}`}
             className="header__phone"
             onClick={() => track('phone_click', { source: 'header' })}
           >
-            {contacts.phone1}
+            {contacts.phone}
           </a>
           <button className="btn header__cta" onClick={onCallback}>
             Замовити дзвінок
@@ -56,7 +56,7 @@ const Header: React.FC<Props> = ({ onCallback }) => {
 
           <div className="header__icons-mobile">
             <a
-              href={`tel:${contacts.phone1Tel}`}
+              href={`tel:${contacts.phoneTel}`}
               className="icon-btn"
               aria-label="Зателефонувати"
               onClick={() => track('phone_click', { source: 'header_mobile' })}

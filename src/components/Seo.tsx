@@ -11,7 +11,7 @@ const jsonLd = {
   name: 'Салон штор «Естер»',
   description,
   url: site.url,
-  telephone: contacts.phone1,
+  telephone: contacts.phone,
   address: {
     '@type': 'PostalAddress',
     streetAddress: contacts.address,

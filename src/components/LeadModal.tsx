@@ -125,11 +125,11 @@ const LeadModal: React.FC<Props> = ({
               </div>
               <div className="modal__direct-links">
                 <a
-                  href={`tel:${contacts.phone1Tel}`}
+                  href={`tel:${contacts.phoneTel}`}
                   className="modal__direct-phone"
                   onClick={() => track('phone_click', { source: 'popup' })}
                 >
-                  {contacts.phone1}
+                  {contacts.phone}
                 </a>
                 <a
                   href={contacts.telegram}

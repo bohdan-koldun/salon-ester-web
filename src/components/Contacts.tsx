@@ -30,18 +30,12 @@ const Contacts: React.FC = () => {
             <p>{contacts.address}</p>
             <p>
               <a
-                href={`tel:${contacts.phone1Tel}`}
+                href={`tel:${contacts.phoneTel}`}
                 onClick={() => track('phone_click', { source: 'contacts' })}
               >
-                {contacts.phone1}
+                {contacts.phone}
               </a>
               {' · '}
-              <a
-                href={`tel:${contacts.phone2Tel}`}
-                onClick={() => track('phone_click', { source: 'contacts' })}
-              >
-                {contacts.phone2}
-              </a>
             </p>
 
             {hours ? (

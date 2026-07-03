@@ -6,7 +6,7 @@ import { scrollToForm } from '../lib/scroll';
 const MobileBar: React.FC = () => (
   <div className="mobile-bar">
     <a
-      href={`tel:${contacts.phone1Tel}`}
+      href={`tel:${contacts.phoneTel}`}
       className="mobile-bar__call"
       onClick={() => track('phone_click', { source: 'mobile_bar' })}
     >

@@ -17,11 +17,9 @@ export const stats = {
 
 // Контактні дані
 export const contacts = {
-  phone1: '+380972402303',
-  phone2: '',
+  phone: '+380972402303',
   // tel: формат — лише цифри та +
-  phone1Tel: '+380972402303',
-  phone2Tel: '',
+  phoneTel: '+380972402303',
   address: 'м. Київ, проспект Степана Бандери, 34а, гіпермаркет меблів MARGO',
   schedule: 'Пн–Пт 10:00–19:00 · Сб–Нд 10:00–19:00',
   email: 'info@salon-ester.com.ua',
