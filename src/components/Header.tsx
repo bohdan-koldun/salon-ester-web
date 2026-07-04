@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { site, contacts } from '../lib/config';
 import { track } from '../lib/tracking';
+import { canDial } from '../lib/device';
 import { PhoneIcon, MenuIcon, CloseIcon } from './icons';
 
 interface Props {
@@ -27,6 +28,16 @@ const Header: React.FC<Props> = ({ onCallback }) => {
 
   const closeMenu = () => setMenuOpen(false);
 
+  // На десктопі tel: нічого не робить — відкриваємо попап «Замовити дзвінок».
+  // На телефоні лишаємо нативний дзвінок.
+  const handlePhone = (source: string) => (e: React.MouseEvent) => {
+    track('phone_click', { source });
+    if (!canDial()) {
+      e.preventDefault();
+      onCallback();
+    }
+  };
+
   return (
     <header className={`header${scrolled ? ' header--scrolled' : ''}`}>
       <div className="header__inner">
@@ -47,7 +58,7 @@ const Header: React.FC<Props> = ({ onCallback }) => {
           <a
             href={`tel:${contacts.phoneTel}`}
             className="header__phone"
-            onClick={() => track('phone_click', { source: 'header' })}
+            onClick={handlePhone('header')}
           >
             {contacts.phone}
           </a>
@@ -60,7 +71,7 @@ const Header: React.FC<Props> = ({ onCallback }) => {
               href={`tel:${contacts.phoneTel}`}
               className="icon-btn icon-btn--phone"
               aria-label="Зателефонувати"
-              onClick={() => track('phone_click', { source: 'header_mobile' })}
+              onClick={handlePhone('header_mobile')}
             >
               <PhoneIcon size={22} />
             </a>

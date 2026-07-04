@@ -50,3 +50,33 @@ export const CheckIcon: React.FC<IconProps> = ({ size = 22, className }) => (
     <polyline points="20 6 9 17 4 12" />
   </svg>
 );
+
+export const MapPinIcon: React.FC<IconProps> = ({ size = 22, className }) => (
+  <svg {...base(size)} className={className}>
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
+);
+
+export const ScissorsIcon: React.FC<IconProps> = ({ size = 22, className }) => (
+  <svg {...base(size)} className={className}>
+    <circle cx="6" cy="6" r="3" />
+    <circle cx="6" cy="18" r="3" />
+    <line x1="20" y1="4" x2="8.12" y2="15.88" />
+    <line x1="14.47" y1="14.48" x2="20" y2="20" />
+    <line x1="8.12" y1="8.12" x2="12" y2="12" />
+  </svg>
+);
+
+export const AwardIcon: React.FC<IconProps> = ({ size = 22, className }) => (
+  <svg {...base(size)} className={className}>
+    <circle cx="12" cy="8" r="7" />
+    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+  </svg>
+);
+
+export const ToolIcon: React.FC<IconProps> = ({ size = 22, className }) => (
+  <svg {...base(size)} className={className}>
+    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+  </svg>
+);
