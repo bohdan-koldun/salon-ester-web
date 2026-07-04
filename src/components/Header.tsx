@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { site, contacts } from '../lib/config';
 import { track } from '../lib/tracking';
+import { PhoneIcon, MenuIcon, CloseIcon } from './icons';
 
 interface Props {
   onCallback: () => void;
@@ -57,11 +58,11 @@ const Header: React.FC<Props> = ({ onCallback }) => {
           <div className="header__icons-mobile">
             <a
               href={`tel:${contacts.phoneTel}`}
-              className="icon-btn"
+              className="icon-btn icon-btn--phone"
               aria-label="Зателефонувати"
               onClick={() => track('phone_click', { source: 'header_mobile' })}
             >
-              📞
+              <PhoneIcon size={22} />
             </a>
             <button
               className="icon-btn burger"
@@ -69,7 +70,7 @@ const Header: React.FC<Props> = ({ onCallback }) => {
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((v) => !v)}
             >
-              {menuOpen ? '✕' : '☰'}
+              {menuOpen ? <CloseIcon size={24} /> : <MenuIcon size={24} />}
             </button>
           </div>
         </div>

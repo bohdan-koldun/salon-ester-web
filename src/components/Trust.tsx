@@ -1,5 +1,6 @@
 import React from 'react';
 import { stats } from '../lib/config';
+import { CheckIcon } from './icons';
 
 const Trust: React.FC = () => {
   const items = [
@@ -14,7 +15,8 @@ const Trust: React.FC = () => {
       <div className="trust__inner">
         {items.map((t) => (
           <div className="trust__item" key={t}>
-            {t}
+            <CheckIcon size={20} className="trust__icon" />
+            <span>{t}</span>
           </div>
         ))}
       </div>

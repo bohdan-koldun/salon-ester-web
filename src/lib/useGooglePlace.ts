@@ -3,6 +3,7 @@ import { google } from './config';
 
 export interface GooglePlaceReview {
   author: string;
+  authorUri?: string;
   avatar?: string;
   rating: number;
   text: string;
@@ -14,9 +15,10 @@ export interface GooglePlaceData {
   count: number;
   reviews: GooglePlaceReview[];
   hours: string[];
+  mapsUri?: string;
 }
 
-const CACHE_KEY = 'ester_google_place_v1';
+const CACHE_KEY = 'ester_google_place_v2';
 const TTL = 24 * 60 * 60 * 1000;
 
 function readCache(): GooglePlaceData | null {
@@ -50,7 +52,7 @@ function fetchPlace(): Promise<GooglePlaceData | null> {
     headers: {
       'X-Goog-Api-Key': google.mapsApiKey,
       'X-Goog-FieldMask':
-        'rating,userRatingCount,reviews,regularOpeningHours.weekdayDescriptions',
+        'rating,userRatingCount,reviews,regularOpeningHours.weekdayDescriptions,googleMapsUri',
     },
   })
     .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
@@ -58,6 +60,7 @@ function fetchPlace(): Promise<GooglePlaceData | null> {
       const reviews: GooglePlaceReview[] = (json.reviews ?? []).map(
         (rev: any) => ({
           author: rev.authorAttribution?.displayName ?? 'Клієнт',
+          authorUri: rev.authorAttribution?.uri,
           avatar: rev.authorAttribution?.photoUri
             ? `${rev.authorAttribution.photoUri.split('=')[0]}=s100`
             : undefined,
@@ -71,6 +74,7 @@ function fetchPlace(): Promise<GooglePlaceData | null> {
         count: json.userRatingCount ?? reviews.length,
         reviews,
         hours: json.regularOpeningHours?.weekdayDescriptions ?? [],
+        mapsUri: json.googleMapsUri,
       };
       writeCache(result);
       return result;

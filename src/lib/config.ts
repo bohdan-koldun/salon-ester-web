@@ -46,6 +46,11 @@ export const writeReviewUrl = google.placeId
   ? `https://search.google.com/local/writereview?placeid=${google.placeId}`
   : 'https://www.google.com/maps';
 
+// Перегляд усіх відгуків на Google
+export const viewReviewsUrl = google.placeId
+  ? `https://search.google.com/local/reviews?placeid=${google.placeId}`
+  : 'https://www.google.com/maps';
+
 // Послуги — використовуються у Services та select формі
 export interface Service {
   key: string;

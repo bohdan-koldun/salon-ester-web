@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { writeReviewUrl } from '../lib/config';
+import { writeReviewUrl, viewReviewsUrl } from '../lib/config';
 import { useGooglePlace } from '../lib/useGooglePlace';
 
 const Stars: React.FC<{ rating: number }> = ({ rating }) => (
@@ -31,6 +31,7 @@ const Avatar: React.FC<{ author: string; src?: string }> = ({
 
 const Reviews: React.FC = () => {
   const data = useGooglePlace();
+  const allReviewsUrl = data?.mapsUri ?? viewReviewsUrl;
 
   return (
     <section className="section section--alt" id="reviews">
@@ -43,8 +44,15 @@ const Reviews: React.FC = () => {
           <>
             <p className="reviews__summary">
               <Stars rating={data.rating} />{' '}
-              <strong>{data.rating.toFixed(1)}</strong> — {data.count} відгуків
-              на Google
+              <strong>{data.rating.toFixed(1)}</strong> —{' '}
+              <a
+                className="reviews__link"
+                href={allReviewsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {data.count} відгуків на Google
+              </a>
             </p>
 
             <div className="reviews__track">
@@ -55,7 +63,19 @@ const Reviews: React.FC = () => {
                       <Avatar author={r.author} src={r.avatar} />
                     </div>
                     <div>
-                      <div className="review-card__name">{r.author}</div>
+                      <div className="review-card__name">
+                        {r.authorUri ? (
+                          <a
+                            href={r.authorUri}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {r.author}
+                          </a>
+                        ) : (
+                          r.author
+                        )}
+                      </div>
                       <div className="review-card__date">{r.date}</div>
                     </div>
                   </div>
@@ -73,12 +93,20 @@ const Reviews: React.FC = () => {
 
         <div className="reviews__cta">
           <a
+            className="btn"
+            href={allReviewsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Усі відгуки на Google →
+          </a>
+          <a
             className="btn btn--ghost"
             href={writeReviewUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
-            Залишити відгук на Google →
+            Залишити відгук
           </a>
         </div>
       </div>

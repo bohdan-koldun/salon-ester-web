@@ -18,7 +18,7 @@ const jsonLd = {
     addressLocality: 'Київ',
     addressCountry: 'UA',
   },
-  image: `${site.url}/og-image.jpg`,
+  image: `${site.url}/og-image.png`,
   priceRange: '$$',
 };
 
@@ -38,7 +38,7 @@ const Seo: React.FC = () => (
       property="og:description"
       content="Виїзд дизайнера. Пошив штор, рулонних, римських. Монтаж під ключ."
     />
-    <meta property="og:image" content={`${site.url}/og-image.jpg`} />
+    <meta property="og:image" content={`${site.url}/og-image.png`} />
     <meta property="og:url" content={site.url} />
     <meta property="og:locale" content="uk_UA" />
 
