@@ -16,7 +16,7 @@ const Gallery: React.FC = () => {
   if (items.length === 0) return null;
 
   return (
-    <section className="section section--bg" id="gallery">
+    <section className="section section--alt" id="gallery">
       <div className="container">
         <div className="section__head">
           <h2>Наші роботи</h2>

@@ -3,7 +3,7 @@ import { stats } from '../lib/config';
 
 const Trust: React.FC = () => {
   const items = [
-    'Безкоштовний виїзд',
+    'Виїзд на замір',
     'Власний цех пошиву',
     `${stats.years}+ років досвіду`,
     'Монтаж під ключ',

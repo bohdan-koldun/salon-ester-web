@@ -1,5 +1,4 @@
 import React from 'react';
-import { stats } from '../lib/config';
 import { scrollToForm } from '../lib/scroll';
 
 const Process: React.FC = () => {
@@ -10,11 +9,11 @@ const Process: React.FC = () => {
     },
     {
       title: 'Дизайнер',
-      text: 'Безкоштовний виїзд: замір, підбір тканин, ескіз на місці.',
+      text: 'Виїзд дизайнера: замір, підбір тканин, ескіз на місці.',
     },
     {
       title: 'Пошив',
-      text: `Виготовляємо у власному цеху. Термін — від ${stats.sewingDays} днів.`,
+      text: 'Виготовляємо у власному цеху з якісних тканин.',
     },
     {
       title: 'Монтаж',
@@ -23,7 +22,7 @@ const Process: React.FC = () => {
   ];
 
   return (
-    <section className="section section--alt" id="process">
+    <section className="section section--bg" id="process">
       <div className="container">
         <div className="section__head">
           <h2>Від заявки до готових штор — 4 кроки</h2>

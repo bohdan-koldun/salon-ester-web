@@ -12,7 +12,7 @@ const LeadForm: React.FC = () => {
     buildMessage: () => [service, comment].filter(Boolean).join('. '),
   });
 
-  // Реагуємо на «Дізнатись вартість» / «Скористатися акцією»
+  // Реагуємо на «Дізнатись вартість» / «Підібрати тканину»
   useEffect(() => {
     const onPrefill = (e: Event) => {
       const detail = (e as CustomEvent<FormPrefill>).detail;

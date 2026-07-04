@@ -22,8 +22,7 @@ const Hero: React.FC = () => (
       <div className="hero__content">
         <h1>Штори на замовлення в Києві</h1>
         <p className="hero__sub">
-          Безкоштовний виїзд дизайнера, індивідуальний проєкт, пошив та монтаж —
-          від {stats.sewingDays} днів.
+          Виїзд дизайнера, індивідуальний проєкт, пошив та монтаж під ключ.
         </p>
         <button className="btn hero__cta" onClick={() => scrollToForm()}>
           Розрахувати вартість

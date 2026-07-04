@@ -12,7 +12,7 @@ const ExitIntentPopup: React.FC<Props> = ({ open, onClose }) => (
     onClose={onClose}
     formName="Exit-intent"
     title="Зачекайте!"
-    subtitle="Отримайте безкоштовну консультацію дизайнера + ескіз у подарунок"
+    subtitle="Залиште контакти — дизайнер прорахує вартість та підготує ескіз"
     buttonLabel="Хочу ескіз"
   />
 );

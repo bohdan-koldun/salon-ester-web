@@ -3,7 +3,7 @@ import { site, contacts } from '../lib/config';
 
 const title = 'Штори на замовлення в Києві — Салон штор «Естер»';
 const description =
-  'Пошив штор на замовлення в Києві. Безкоштовний виїзд дизайнера, індивідуальний проєкт, власний цех пошиву.';
+  'Пошив штор на замовлення в Києві. Виїзд дизайнера, індивідуальний проєкт, власний цех пошиву.';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -36,7 +36,7 @@ const Seo: React.FC = () => (
     />
     <meta
       property="og:description"
-      content="Безкоштовний виїзд дизайнера. Пошив штор, рулонних, римських. Монтаж під ключ."
+      content="Виїзд дизайнера. Пошив штор, рулонних, римських. Монтаж під ключ."
     />
     <meta property="og:image" content={`${site.url}/og-image.jpg`} />
     <meta property="og:url" content={site.url} />
