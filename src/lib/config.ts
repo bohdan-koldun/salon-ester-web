@@ -135,8 +135,8 @@ export const fabrics: Fabric[] = [
 
 // Галерея — імена файлів у src/images/gallery/ (6–9 фото)
 export const gallery: string[] = [
-  'work-1.jpg',
-  'work-2.jpg',
+  'work-1.png',
+  'work-2.png',
   'work-3.png',
   'work-4.jpg',
   'work-5.jpg',
