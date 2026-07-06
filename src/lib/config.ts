@@ -67,6 +67,18 @@ export const services: Service[] = [
     image: 'service-curtains.png',
   },
   {
+    key: 'roman',
+    title: 'Римські штори',
+    desc: 'Елегантні тканинні панелі з рівними складками. Ідеально для невеликих вікон.',
+    image: 'service-roman.png',
+  },
+  {
+    key: 'roller',
+    title: 'Рулонні штори',
+    desc: 'Практичне рішення для кухні, офісу чи балкона. Захист від сонця та стиль.',
+    image: 'service-roller.png',
+  },
+  {
     key: 'pleat',
     title: 'Штори плісе',
     desc: 'Компактна система зі складками-гармошкою. Точно під розмір вікна, без провисань.',
@@ -85,34 +97,22 @@ export const services: Service[] = [
     image: 'service-roller-outdoor.png',
   },
   {
-    key: 'roller',
-    title: 'Рулонні штори',
-    desc: 'Практичне рішення для кухні, офісу чи балкона. Захист від сонця та стиль.',
-    image: 'service-roller.png',
-  },
-  {
-    key: 'roman',
-    title: 'Римські штори',
-    desc: 'Елегантні тканинні панелі з рівними складками. Ідеально для невеликих вікон.',
-    image: 'service-roman.png',
-  },
-  {
     key: 'blinds',
     title: 'Жалюзі',
     desc: 'Дерев’яні та алюмінієві. Довговічні, прості в догляді.',
     image: 'service-blinds.png',
   },
   {
-    key: 'cornices',
-    title: 'Карнизи та монтаж',
-    desc: 'Підбір, доставка та встановлення. Металеві, дерев’яні, профільні.',
-    image: 'service-cornices.png',
-  },
-  {
     key: 'textile',
     title: 'Текстиль для дому',
     desc: 'Покривала, подушки, скатертини, чохли — в єдиному стилі зі шторами.',
     image: 'service-textile.png',
+  },
+  {
+    key: 'cornices',
+    title: 'Карнизи та монтаж',
+    desc: 'Підбір, доставка та встановлення. Металеві, дерев’яні, профільні.',
+    image: 'service-cornices.png',
   },
 ];
 
@@ -156,12 +156,12 @@ export const gallery: string[] = [
   'work-1.png',
   'work-2.png',
   'work-3.png',
-  'work-4.jpg',
-  'work-5.jpg',
-  'work-6.jpg',
+  'work-4.png',
+  'work-5.png',
+  'work-6.png',
   'work-7.png',
-  'work-8.jpg',
-  'work-9.jpg',
+  'work-8.png',
+  'work-9.png',
 ];
 
 // Опції select у формах (включно з «Інше»)
@@ -173,7 +173,7 @@ export const serviceOptions = [
   'Штори на люверсах',
   'Зовнішні ролети',
   'Жалюзі',
-  'Карнизи та монтаж',
   'Текстиль',
+  'Карнизи та монтаж',
   'Інше',
 ];
