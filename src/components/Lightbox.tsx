@@ -48,8 +48,12 @@ const Lightbox: React.FC<Props> = ({ images, index, onClose, onNavigate }) => {
           ‹
         </button>
       )}
-      <div className="lightbox__img" onClick={(e) => e.stopPropagation()}>
-        <GatsbyImage image={image} alt={`Робота ${index + 1}`} />
+      <div
+        className="lightbox__img"
+        style={{ aspectRatio: `${image.width} / ${image.height}` }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <GatsbyImage image={image} alt={`Робота ${index + 1}`} style={{ width: '100%', height: '100%' }} />
       </div>
       {count > 1 && (
         <button

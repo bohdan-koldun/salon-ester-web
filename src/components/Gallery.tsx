@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import { GatsbyImage, type IGatsbyImageData } from 'gatsby-plugin-image';
 import { gallery } from '../lib/config';
-import { useImageMap } from '../lib/useImages';
+import { useImageMap, useLargeImageMap } from '../lib/useImages';
 import { scrollToForm } from '../lib/scroll';
 import Lightbox from './Lightbox';
 
 const Gallery: React.FC = () => {
   const images = useImageMap();
+  const largeImages = useLargeImageMap();
   const [active, setActive] = useState<number | null>(null);
 
   const items: IGatsbyImageData[] = gallery
     .map((file) => images[`gallery/${file}`])
+    .filter(Boolean) as IGatsbyImageData[];
+
+  const largeItems: IGatsbyImageData[] = gallery
+    .map((file) => largeImages[`gallery/${file}`])
     .filter(Boolean) as IGatsbyImageData[];
 
   if (items.length === 0) return null;
@@ -44,7 +49,7 @@ const Gallery: React.FC = () => {
 
       {active !== null && (
         <Lightbox
-          images={items}
+          images={largeItems}
           index={active}
           onClose={() => setActive(null)}
           onNavigate={setActive}
