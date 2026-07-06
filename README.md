@@ -19,7 +19,7 @@ npm run typecheck    # перевірка типів
 
 ### 2. Зображення (замінити заглушки)
 - `src/images/hero.png` — hero-фон (≥1920×1080)
-- `src/images/services/*.jpg` — 6 фото послуг (≥800×600), імена з `config.ts`
+- `src/images/services/*.jpg` — 9 фото послуг (≥800×600), імена з `config.ts`
 - `src/images/gallery/work-*.jpg` — 6–9 робіт (квадратні), імена з `config.ts`
 - `src/images/icon.png` — іконка PWA (512×512)
 - `static/og-image.jpg` — превʼю для соцмереж (1200×630)
