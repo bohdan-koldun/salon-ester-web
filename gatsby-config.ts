@@ -14,18 +14,6 @@ const config: GatsbyConfig = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-sitemap',
     {
-      resolve: 'gatsby-plugin-manifest',
-      options: {
-        name: 'Салон штор «Естер»',
-        short_name: 'Естер',
-        start_url: '/',
-        background_color: '#FAFAF7',
-        theme_color: '#5B6B4A',
-        display: 'standalone',
-        icon: 'src/images/icon.png',
-      },
-    },
-    {
       resolve: 'gatsby-source-filesystem',
       options: { name: 'images', path: './src/images/' },
     },

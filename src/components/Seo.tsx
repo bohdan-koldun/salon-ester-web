@@ -29,6 +29,14 @@ const Seo: React.FC = () => (
     <meta name="description" content={description} />
     <link rel="canonical" href={`${site.url}/`} />
 
+    <link rel="icon" href="/favicons/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicons/favicon-48x48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+    <link rel="manifest" href="/favicons/site.webmanifest" />
+    <meta name="theme-color" content="#5B6B4A" />
+
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
