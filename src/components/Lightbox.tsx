@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { GatsbyImage, type IGatsbyImageData } from 'gatsby-plugin-image';
 
 interface Props {
@@ -8,10 +8,29 @@ interface Props {
   onNavigate: (index: number) => void;
 }
 
+const SWIPE_THRESHOLD = 40;
+
 const Lightbox: React.FC<Props> = ({ images, index, onClose, onNavigate }) => {
   const count = images.length;
   const prev = () => onNavigate((index - 1 + count) % count);
   const next = () => onNavigate((index + 1) % count);
+  const touchStartX = useRef(0);
+  const touchDeltaX = useRef(0);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchDeltaX.current = 0;
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    touchDeltaX.current = e.touches[0].clientX - touchStartX.current;
+  };
+
+  const onTouchEnd = () => {
+    if (touchDeltaX.current > SWIPE_THRESHOLD) prev();
+    else if (touchDeltaX.current < -SWIPE_THRESHOLD) next();
+    touchDeltaX.current = 0;
+  };
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -32,9 +51,20 @@ const Lightbox: React.FC<Props> = ({ images, index, onClose, onNavigate }) => {
   if (!image) return null;
 
   return (
-    <div className="lightbox" onClick={onClose} role="dialog" aria-modal="true">
+    <div
+      className="lightbox"
+      onClick={onClose}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+      role="dialog"
+      aria-modal="true"
+    >
       <button className="lightbox__close" onClick={onClose} aria-label="Закрити">
-        ×
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+          <line x1="6" y1="6" x2="18" y2="18" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+        </svg>
       </button>
       {count > 1 && (
         <button
@@ -45,7 +75,9 @@ const Lightbox: React.FC<Props> = ({ images, index, onClose, onNavigate }) => {
             prev();
           }}
         >
-          ‹
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 6 9 12 15 18" />
+          </svg>
         </button>
       )}
       <div
@@ -64,7 +96,9 @@ const Lightbox: React.FC<Props> = ({ images, index, onClose, onNavigate }) => {
             next();
           }}
         >
-          ›
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 6 15 12 9 18" />
+          </svg>
         </button>
       )}
     </div>

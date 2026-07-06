@@ -715,15 +715,38 @@ h3 {
 .lightbox__close,
 .lightbox__nav {
   position: absolute;
-  color: var(--c-white);
-  font-size: 28px;
-  width: 52px;
-  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.3);
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
   border-radius: 50%;
+  background: transparent;
+  color: var(--c-white);
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    transform 0.15s;
+}
+
+.lightbox__close svg,
+.lightbox__nav svg {
+  width: 20px;
+  height: 20px;
+}
+
+.lightbox__close:hover,
+.lightbox__close:focus-visible,
+.lightbox__nav:hover,
+.lightbox__nav:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--c-white);
+}
+
+.lightbox__close:active,
+.lightbox__nav:active {
+  transform: scale(0.92);
 }
 
 .lightbox__close {
