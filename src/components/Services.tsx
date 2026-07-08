@@ -50,7 +50,7 @@ const Services: React.FC = () => {
           subtitle={activeService}
           buttonLabel="Отримати розрахунок"
           footnote="Зателефонуємо й уточнимо деталі найближчим часом"
-          buildMessage={() => `Цікавить послуга: ${activeService}`}
+          defaultComment={`Цікавить послуга: ${activeService}`}
         />
       )}
     </section>

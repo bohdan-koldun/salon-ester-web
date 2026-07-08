@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLeadForm } from '../lib/useLeadForm';
 import { contacts } from '../lib/config';
 import { track } from '../lib/tracking';
@@ -12,6 +12,10 @@ interface Props {
   buttonLabel: string;
   footnote?: string;
   buildMessage?: () => string;
+  /** Наперед заповнений текст поля «Коментар». Якщо заданий — поле показується. */
+  defaultComment?: string;
+  /** Явно показати поле «Коментар» (навіть порожнім). */
+  withComment?: boolean;
 }
 
 const LeadModal: React.FC<Props> = ({
@@ -23,8 +27,15 @@ const LeadModal: React.FC<Props> = ({
   buttonLabel,
   footnote,
   buildMessage,
+  defaultComment,
+  withComment,
 }) => {
-  const form = useLeadForm({ formName, buildMessage });
+  const showComment = withComment ?? Boolean(defaultComment);
+  const [comment, setComment] = useState(defaultComment ?? '');
+  const form = useLeadForm({
+    formName,
+    buildMessage: showComment ? () => comment : buildMessage,
+  });
 
   // Esc для закриття + блокування скролу body
   useEffect(() => {
@@ -89,6 +100,17 @@ const LeadModal: React.FC<Props> = ({
                   required
                 />
               </div>
+
+              {showComment && (
+                <div className="field">
+                  <textarea
+                    placeholder="Коментар"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    rows={3}
+                  />
+                </div>
+              )}
 
               {/* honeypot */}
               <input
