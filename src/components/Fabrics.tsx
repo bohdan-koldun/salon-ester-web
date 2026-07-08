@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import { fabrics } from '../lib/config';
+import { useImageMap } from '../lib/useImages';
 import LeadModal from './LeadModal';
 
 const Fabrics: React.FC = () => {
+  const images = useImageMap();
   const [activeFabric, setActiveFabric] = useState<string | null>(null);
 
   return (
@@ -17,21 +20,28 @@ const Fabrics: React.FC = () => {
         </div>
 
         <div className="fabrics-grid">
-          {fabrics.map((f) => (
-            <button
-              className="fabric-card"
-              key={f.key}
-              onClick={() => setActiveFabric(f.title)}
-              aria-label={`Підібрати тканину: ${f.title}`}
-            >
-              <span className="fabric-card__bar" aria-hidden="true" />
-              <h3>{f.title}</h3>
-              <p>{f.desc}</p>
-              <span className="link-cta" aria-hidden="true">
-                Підібрати →
-              </span>
-            </button>
-          ))}
+          {fabrics.map((f) => {
+            const img = images[`fabrics/${f.image}`];
+            return (
+              <button
+                className="fabric-card"
+                key={f.key}
+                onClick={() => setActiveFabric(f.title)}
+                aria-label={`Підібрати тканину: ${f.title}`}
+              >
+                <div className="fabric-card__img">
+                  {img && <GatsbyImage image={img} alt={f.title} />}
+                </div>
+                <div className="fabric-card__body">
+                  <h3>{f.title}</h3>
+                  <p>{f.desc}</p>
+                  <span className="link-cta" aria-hidden="true">
+                    Підібрати →
+                  </span>
+                </div>
+              </button>
+            );
+          })}
         </div>
       </div>
 

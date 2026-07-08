@@ -559,21 +559,22 @@ h3 {
 /* ── Fabrics ── */
 .fabrics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
 }
 
 .fabric-card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  width: 100%;
+  padding: 0;
   text-align: left;
   cursor: pointer;
   font-family: inherit;
   background: var(--c-white);
   border: 1px solid var(--c-border);
   border-radius: var(--r-card);
-  padding: 28px 24px;
+  overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 
@@ -590,12 +591,16 @@ h3 {
   color: var(--c-accent-h);
 }
 
-.fabric-card__bar {
-  width: 40px;
-  height: 3px;
-  background: var(--c-accent);
-  border-radius: 2px;
-  margin-bottom: 18px;
+.fabric-card__img {
+  aspect-ratio: 4 / 3;
+  background: var(--c-bg-alt);
+}
+
+.fabric-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px;
 }
 
 .fabric-card h3 {
@@ -610,6 +615,7 @@ h3 {
 
 .fabric-card .link-cta {
   margin-top: 16px;
+  align-self: flex-start;
 }
 
 /* ── Process ── */

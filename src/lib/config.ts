@@ -135,33 +135,63 @@ export interface Fabric {
   key: string;
   title: string;
   desc: string;
+  image: string; // ім'я файлу у src/images/fabrics/
 }
 
 export const fabrics: Fabric[] = [
   {
-    key: 'blackout',
-    title: 'Блекаут',
-    desc: 'Щільна тканина, що не пропускає світло. Ідеальна для спальні та дитячої.',
+    key: 'curtains-blackout',
+    title: 'Штори блекаут',
+    desc: 'Щільна тканина, що повністю не пропускає світло. Ідеальна для спальні та дитячої.',
+    image: 'curtains-blackout.png',
   },
   {
-    key: 'linen',
-    title: 'Льон',
-    desc: 'Натуральний матеріал з живою фактурою. Природний вигляд і повітропроникність.',
+    key: 'curtains-linen',
+    title: 'Штори льон',
+    desc: 'Натуральна тканина з живою фактурою. Природний вигляд і повітропроникність.',
+    image: 'curtains-linen.png',
   },
   {
-    key: 'crepe',
-    title: 'Креп',
-    desc: 'Щільне плетіння з легким рельєфом. Гарно тримає форму та драпірування.',
+    key: 'curtains-microvelour',
+    title: 'Штори мікровелюр',
+    desc: 'Тонкий м’який ворс, приємний на дотик. Гарно драпірується та тримає форму.',
+    image: 'curtains-microvelour.png',
   },
   {
-    key: 'voile',
-    title: 'Вуаль',
-    desc: 'Легка напівпрозора тканина. М’яко розсіює світло й наповнює кімнату повітрям.',
+    key: 'curtains-velor',
+    title: 'Штори велюр',
+    desc: 'Щільна ворсиста тканина з насиченим кольором. Затишок і гарна звукоізоляція.',
+    image: 'curtains-velor.png',
   },
   {
-    key: 'velvet',
-    title: 'Оксамит',
-    desc: 'Оксамитова поверхня з глибиною кольору. Розкіш, затишок і чудова звукоізоляція.',
+    key: 'curtains-velvet',
+    title: 'Штори оксамит',
+    desc: 'Розкішна оксамитова поверхня з глибиною кольору. Благородний вигляд і звукоізоляція.',
+    image: 'curtains-velvet.png',
+  },
+  {
+    key: 'curtains-and-tulle-classic',
+    title: 'Штори та тюль з класичним візерунком',
+    desc: 'Готове поєднання штор і тюлю з елегантним класичним візерунком для вітальні та спальні.',
+    image: 'curtains-and-tulle-with-a-classic-pattern.png',
+  },
+  {
+    key: 'tulle-linen',
+    title: 'Тюль льон',
+    desc: 'Легкий напівпрозорий тюль із фактурою льону. М’яко розсіює світло й додає затишку.',
+    image: 'tulle-linen.png',
+  },
+  {
+    key: 'tulle-crepe-veil',
+    title: 'Тюль креп-вуаль',
+    desc: 'Тонка повітряна тканина. Наповнює кімнату м’яким розсіяним світлом.',
+    image: 'tulle-crepe-veil.png',
+  },
+  {
+    key: 'tulle-mesh',
+    title: 'Тюль сітка',
+    desc: 'Легка сітчаста тканина. Максимум повітря та світла в інтер’єрі.',
+    image: 'tulle-mesh.png',
   },
 ];
 
