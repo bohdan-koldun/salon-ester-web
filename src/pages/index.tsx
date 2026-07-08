@@ -10,6 +10,7 @@ import Process from '../components/Process';
 import Gallery from '../components/Gallery';
 import Pricing from '../components/Pricing';
 import Reviews from '../components/Reviews';
+import Faq from '../components/Faq';
 import LeadForm from '../components/LeadForm';
 import Contacts from '../components/Contacts';
 import Divider from '../components/Divider';
@@ -25,6 +26,7 @@ const IndexPage: React.FC = () => (
     <Gallery />
     <Pricing />
     <Reviews />
+    <Faq />
     <Divider />
     <LeadForm />
     <Contacts />

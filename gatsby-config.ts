@@ -5,7 +5,7 @@ const config: GatsbyConfig = {
     title: 'Штори на замовлення в Києві — Салон штор «Естер»',
     description:
       'Пошив штор на замовлення в Києві. Безкоштовний виїзд дизайнера, індивідуальний проєкт, власний цех пошиву. Від заміру до монтажу — від 14 днів.',
-    siteUrl: 'https://salon-ester.com.ua',
+    siteUrl: 'https://estershtory.kyiv.ua',
   },
   graphqlTypegen: true,
   plugins: [

@@ -1354,3 +1354,70 @@ h3 {
 .no-scroll {
   overflow: hidden;
 }
+
+/* ── FAQ ── */
+.faq {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.faq__item {
+  border-bottom: 1px solid var(--c-border);
+}
+
+.faq__q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 4px;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--f-display);
+  font-size: 21px;
+  color: var(--c-text);
+}
+
+.faq__q::-webkit-details-marker {
+  display: none;
+}
+
+.faq__q:hover {
+  color: var(--c-accent);
+}
+
+.faq__icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+}
+
+.faq__icon::before,
+.faq__icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 2px;
+  background: var(--c-accent);
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease;
+}
+
+.faq__icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.faq__item[open] .faq__icon::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.faq__a {
+  margin: 0;
+  padding: 0 4px 24px;
+  color: var(--c-text-muted);
+  line-height: 1.65;
+}
+

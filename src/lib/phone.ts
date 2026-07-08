@@ -32,5 +32,5 @@ export function maskPhone(raw: string): string {
 }
 
 export function isValidPhone(value: string): boolean {
-  return value.replace(/\D/g, '').length > 5;
+  return value.length > 5;
 }

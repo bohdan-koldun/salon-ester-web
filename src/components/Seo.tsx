@@ -1,25 +1,146 @@
 import React from 'react';
-import { site, contacts } from '../lib/config';
+import {
+  site,
+  contacts,
+  geo,
+  reviewsSummary,
+  services,
+  faq,
+  google,
+} from '../lib/config';
 
 const title = 'Штори на замовлення в Києві — Салон штор «Естер»';
 const description =
   'Пошив штор на замовлення в Києві. Виїзд дизайнера, індивідуальний проєкт, власний цех пошиву.';
 
+const orgId = `${site.url}/#organization`;
+const businessId = `${site.url}/#localbusiness`;
+const websiteId = `${site.url}/#website`;
+const logo = `${site.url}/favicons/android-chrome-512x512.png`;
+const ogImage = `${site.url}/og-image.png`;
+
+// Лінк на профіль у Google Maps (зв'язує сайт із Business Profile у видачі).
+const googleMapsUrl = google.placeId
+  ? `https://www.google.com/maps/place/?q=place_id:${google.placeId}`
+  : undefined;
+
+const sameAs = [googleMapsUrl].filter(Boolean) as string[];
+
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'Салон штор «Естер»',
-  description,
-  url: site.url,
-  telephone: contacts.phone,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: contacts.address,
-    addressLocality: 'Київ',
-    addressCountry: 'UA',
-  },
-  image: `${site.url}/og-image.png`,
-  priceRange: '$$',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': orgId,
+      name: 'Салон штор «Естер»',
+      url: site.url,
+      logo: {
+        '@type': 'ImageObject',
+        url: logo,
+      },
+      image: ogImage,
+      email: contacts.email,
+      telephone: contacts.phone,
+      ...(sameAs.length ? { sameAs } : {}),
+    },
+    {
+      '@type': 'WebSite',
+      '@id': websiteId,
+      url: site.url,
+      name: title,
+      inLanguage: 'uk-UA',
+      publisher: { '@id': orgId },
+    },
+    {
+      '@type': ['LocalBusiness', 'HomeGoodsStore'],
+      '@id': businessId,
+      name: 'Салон штор «Естер»',
+      description,
+      url: site.url,
+      telephone: contacts.phone,
+      email: contacts.email,
+      image: ogImage,
+      logo,
+      priceRange: '$$',
+      currenciesAccepted: 'UAH',
+      parentOrganization: { '@id': orgId },
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'проспект Степана Бандери, 34а',
+        addressLocality: 'Київ',
+        postalCode: '04073',
+        addressCountry: 'UA',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: geo.lat,
+        longitude: geo.lng,
+      },
+      areaServed: {
+        '@type': 'City',
+        name: 'Київ',
+      },
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: [
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+            'Sunday',
+          ],
+          opens: '10:00',
+          closes: '19:00',
+        },
+      ],
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: reviewsSummary.rating,
+        reviewCount: reviewsSummary.count,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      ...(sameAs.length ? { sameAs } : {}),
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Послуги салону штор «Естер»',
+        itemListElement: services.map((s) => ({
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: s.title,
+            description: s.desc,
+          },
+        })),
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${site.url}/#faq`,
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.a,
+        },
+      })),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Головна',
+          item: `${site.url}/`,
+        },
+      ],
+    },
+  ],
 };
 
 const Seo: React.FC = () => (
@@ -38,6 +159,7 @@ const Seo: React.FC = () => (
     <meta name="theme-color" content="#5B6B4A" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Салон штор «Естер»" />
     <meta
       property="og:title"
       content="Штори на замовлення в Києві — Салон штор «Естер»"
@@ -46,11 +168,17 @@ const Seo: React.FC = () => (
       property="og:description"
       content="Виїзд дизайнера. Пошив штор, рулонних, римських. Монтаж під ключ."
     />
-    <meta property="og:image" content={`${site.url}/og-image.png`} />
-    <meta property="og:url" content={site.url} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={`${site.url}/`} />
     <meta property="og:locale" content="uk_UA" />
 
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta
+      name="twitter:description"
+      content="Виїзд дизайнера. Пошив штор, рулонних, римських. Монтаж під ключ."
+    />
+    <meta name="twitter:image" content={ogImage} />
 
     <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
   </>
