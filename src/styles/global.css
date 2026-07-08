@@ -559,8 +559,15 @@ h3 {
 /* ── Fabrics ── */
 .fabrics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .fabrics-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+  }
 }
 
 .fabric-card {
@@ -600,22 +607,48 @@ h3 {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 20px;
+  padding: 12px 14px;
 }
 
 .fabric-card h3 {
-  margin-bottom: 8px;
+  font-size: 16px;
+  line-height: 1.25;
+  margin-bottom: 0;
 }
 
 .fabric-card p {
   color: var(--c-text-muted);
-  font-size: 15px;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 6px;
   flex: 1;
 }
 
 .fabric-card .link-cta {
   margin-top: 16px;
   align-self: flex-start;
+  /* На мобільному підпис зайвий — тап по картці відкриває форму. */
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .fabric-card__body {
+    padding: 20px;
+  }
+
+  .fabric-card h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .fabric-card p {
+    font-size: 15px;
+    margin-top: 0;
+  }
+
+  .fabric-card .link-cta {
+    display: inline-flex;
+  }
 }
 
 /* ── Process ── */
