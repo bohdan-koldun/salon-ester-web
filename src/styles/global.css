@@ -461,6 +461,9 @@ h3 {
 
 .hero h1 {
   color: var(--c-white);
+  font-size: clamp(40px, 7vw, 76px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
 }
 
 .hero__sub {
@@ -480,6 +483,18 @@ h3 {
   color: rgba(255, 255, 255, 0.7);
 }
 
+@media (min-width: 768px) {
+  .hero__content {
+    max-width: 780px;
+  }
+
+  .hero__sub {
+    margin-top: 24px;
+    font-size: 21px;
+    max-width: 600px;
+  }
+}
+
 /* ── Services ── */
 .services-grid {
   display: grid;
@@ -490,6 +505,11 @@ h3 {
 .service-card {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  padding: 0;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
   background: var(--c-white);
   border: 1px solid var(--c-border);
   border-radius: var(--r-card);
@@ -497,10 +517,17 @@ h3 {
   transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 
-.service-card:hover {
+.service-card:hover,
+.service-card:focus-visible {
   transform: translateY(-4px);
   border-color: var(--c-accent);
   box-shadow: 0 12px 28px rgba(44, 44, 44, 0.08);
+}
+
+.service-card:hover .link-cta,
+.service-card:focus-visible .link-cta {
+  gap: 12px;
+  color: var(--c-accent-h);
 }
 
 .service-card__img {
@@ -715,6 +742,7 @@ h3 {
 .lightbox__close,
 .lightbox__nav {
   position: absolute;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;

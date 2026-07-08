@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { services } from '../lib/config';
 import { useImageMap } from '../lib/useImages';
-import { scrollToForm } from '../lib/scroll';
+import LeadModal from './LeadModal';
 
 const Services: React.FC = () => {
   const images = useImageMap();
+  const [activeService, setActiveService] = useState<string | null>(null);
 
   return (
     <section className="section section--bg" id="services">
@@ -18,23 +19,40 @@ const Services: React.FC = () => {
           {services.map((s) => {
             const img = images[`services/${s.image}`];
             return (
-              <article className="service-card" key={s.key}>
+              <button
+                type="button"
+                className="service-card"
+                key={s.key}
+                onClick={() => setActiveService(s.title)}
+                aria-label={`Розрахувати вартість: ${s.title}`}
+              >
                 <div className="service-card__img">
                   {img && <GatsbyImage image={img} alt={s.title} />}
                 </div>
                 <h3>{s.title}</h3>
                 <p>{s.desc}</p>
-                <button
-                  className="link-cta"
-                  onClick={() => scrollToForm({ service: s.title })}
-                >
+                <span className="link-cta" aria-hidden="true">
                   Дізнатись вартість →
-                </button>
-              </article>
+                </span>
+              </button>
             );
           })}
         </div>
       </div>
+
+      {activeService && (
+        <LeadModal
+          key={activeService}
+          open
+          onClose={() => setActiveService(null)}
+          formName={`Послуга: ${activeService}`}
+          title="Розрахувати вартість"
+          subtitle={activeService}
+          buttonLabel="Отримати розрахунок"
+          footnote="Зателефонуємо й уточнимо деталі найближчим часом"
+          buildMessage={() => `Цікавить послуга: ${activeService}`}
+        />
+      )}
     </section>
   );
 };

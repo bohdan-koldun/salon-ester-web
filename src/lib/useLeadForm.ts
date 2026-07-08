@@ -14,6 +14,10 @@ export function useLeadForm({ formName, buildMessage }: UseLeadFormArgs) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>(
     'idle'
   );
+  // 'validation' — некоректний телефон; 'server' — не вдалося доставити заявку.
+  const [errorKind, setErrorKind] = useState<'validation' | 'server' | null>(
+    null
+  );
 
   const onPhoneChange = (v: string) => setPhone(maskPhone(v));
 
@@ -21,16 +25,19 @@ export function useLeadForm({ formName, buildMessage }: UseLeadFormArgs) {
     setName('');
     setPhone('');
     setStatus('idle');
+    setErrorKind(null);
   };
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     if (status === 'sending') return;
     if (!isValidPhone(phone)) {
+      setErrorKind('validation');
       setStatus('error');
       return;
     }
     setStatus('sending');
+    setErrorKind(null);
     const res = await submitLead({
       name,
       phone,
@@ -38,7 +45,12 @@ export function useLeadForm({ formName, buildMessage }: UseLeadFormArgs) {
       form: formName,
       company,
     });
-    setStatus(res.ok ? 'done' : 'error');
+    if (res.ok) {
+      setStatus('done');
+    } else {
+      setErrorKind('server');
+      setStatus('error');
+    }
   };
 
   return {
@@ -49,6 +61,7 @@ export function useLeadForm({ formName, buildMessage }: UseLeadFormArgs) {
     company,
     setCompany,
     status,
+    errorKind,
     submit,
     reset,
   };

@@ -104,7 +104,9 @@ const LeadModal: React.FC<Props> = ({
 
               {form.status === 'error' && (
                 <div className="form__error">
-                  Перевірте номер телефону та спробуйте ще раз.
+                  {form.errorKind === 'validation'
+                    ? 'Перевірте номер телефону та спробуйте ще раз.'
+                    : 'Не вдалося надіслати заявку. Зателефонуйте нам або спробуйте пізніше.'}
                 </div>
               )}
 

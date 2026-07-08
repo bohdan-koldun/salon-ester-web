@@ -56,6 +56,27 @@ function send_to_telegram($token, $chatId, $text) {
         'parse_mode' => 'html',
         'text'       => $text,
     ]);
+
+    // Основний шлях — cURL (працює навіть коли allow_url_fopen вимкнено на хостингу).
+    if (function_exists('curl_init')) {
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [
+            CURLOPT_POST           => true,
+            CURLOPT_POSTFIELDS     => $payload,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT        => 10,
+        ]);
+        $resp = curl_exec($ch);
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        if ($resp !== false) {
+            // Сервер відповів — успіх лише якщо Telegram підтвердив ok:true.
+            return $code === 200 && strpos($resp, '"ok":true') !== false;
+        }
+        // cURL не зміг з'єднатися — пробуємо запасний шлях нижче.
+    }
+
+    // Запасний шлях — stream context.
     $ctx = stream_context_create(['http' => [
         'method'        => 'POST',
         'header'        => "Content-Type: application/x-www-form-urlencoded\r\n",
@@ -63,7 +84,8 @@ function send_to_telegram($token, $chatId, $text) {
         'timeout'       => 10,
         'ignore_errors' => true,
     ]]);
-    return @file_get_contents($url, false, $ctx) !== false;
+    $resp = @file_get_contents($url, false, $ctx);
+    return $resp !== false && strpos($resp, '"ok":true') !== false;
 }
 
 function send_email($to, $subject, $htmlText) {
