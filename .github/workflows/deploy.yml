@@ -54,7 +54,7 @@ jobs:
           return [
               'bot_token'    => '${{ secrets.TELEGRAM_BOT_TOKEN }}',
               'chat_id'      => '${{ secrets.TELEGRAM_CHAT_ID }}',
-              'lead_chat_id' => '${{ secrets.LEAD_TELEGRAM_CHAT_ID }}',
+              'lead_chat_id' => '${{ secrets.TELEGRAM_CHAT_ID }}',
               'lead_email'   => '${{ secrets.LEAD_EMAIL }}',
           ];
           PHPEOF

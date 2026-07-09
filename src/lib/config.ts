@@ -35,7 +35,7 @@ export const contacts = {
   phoneTel: '+380972402303',
   address: 'м. Київ, проспект Степана Бандери, 34а, гіпермаркет меблів MARGO',
   schedule: 'Пн–Пт 10:00–19:00 · Сб–Нд 10:00–19:00',
-  email: 'ester.77@ukr.net',
+  email: 'info@estershtory.kyiv.ua',
   viber: 'viber://chat?number=%2B380972402303',
   telegram: 'https://t.me/+380972402303',
   // Google Maps embed: вставте координати/адресу салону
