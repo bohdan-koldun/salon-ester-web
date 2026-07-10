@@ -589,9 +589,8 @@ h3 {
   gap: 12px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  /* Вихід за поля секції, щоб карусель тяглася від краю до краю */
-  margin-inline: -24px;
-  padding: 4px 24px 14px;
+  /* Карусель лишається в межах контейнера → з боків видно відступ секції */
+  padding-block: 4px 14px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
@@ -605,7 +604,6 @@ h3 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 28px;
-    margin-inline: 0;
     padding: 0;
     overflow: visible;
   }
