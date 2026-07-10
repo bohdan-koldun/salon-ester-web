@@ -3,7 +3,7 @@ import { submitLead } from './leads/submitLead';
 import { maskPhone, isValidPhone } from './phone';
 
 interface UseLeadFormArgs {
-  formName: string; // «Основна форма» | «Замовити дзвінок» | «Exit-intent»
+  formName: string; // «Основна форма» | «Замовити дзвінок»
   buildMessage?: () => string;
 }
 

@@ -2,7 +2,7 @@ export interface LeadPayload {
   name: string;
   phone: string;
   message?: string;
-  form: string; // «Основна форма» | «Замовити дзвінок» | «Exit-intent»
+  form: string; // «Основна форма» | «Замовити дзвінок»
   url?: string;
   company?: string; // honeypot
 }

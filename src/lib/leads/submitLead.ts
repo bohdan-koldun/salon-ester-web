@@ -29,9 +29,6 @@ export async function submitLead(payload: LeadPayload): Promise<SubmitResult> {
     const ok = Boolean(data?.ok ?? res.ok);
     if (ok) {
       track('lead_submit', { label: payload.form, form: payload.form });
-      if (typeof window !== 'undefined') {
-        window.dispatchEvent(new Event('ester:lead'));
-      }
     }
     return { ok };
   } catch {
