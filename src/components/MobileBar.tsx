@@ -28,7 +28,10 @@ const MobileBar: React.FC<Props> = ({ onCallback }) => {
         <PhoneIcon size={17} />
         Зателефонувати
       </a>
-      <button className="mobile-bar__lead" onClick={() => scrollToForm()}>
+      <button
+        className="mobile-bar__lead"
+        onClick={() => scrollToForm(undefined, 'mobile_bar')}
+      >
         <SendIcon size={17} />
         Залишити заявку
       </button>

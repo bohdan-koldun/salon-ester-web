@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { fabrics } from '../lib/config';
 import { useImageMap } from '../lib/useImages';
+import { track } from '../lib/tracking';
 import LeadModal from './LeadModal';
 
 const Fabrics: React.FC = () => {
@@ -26,7 +27,10 @@ const Fabrics: React.FC = () => {
               <button
                 className="fabric-card"
                 key={f.key}
-                onClick={() => setActiveFabric(f.title)}
+                onClick={() => {
+                  track('fabric_click', { fabric: f.title });
+                  setActiveFabric(f.title);
+                }}
                 aria-label={`Підібрати тканину: ${f.title}`}
               >
                 <div className="fabric-card__img">

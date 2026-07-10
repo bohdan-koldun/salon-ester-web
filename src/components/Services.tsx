@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { services } from '../lib/config';
 import { useImageMap } from '../lib/useImages';
+import { track } from '../lib/tracking';
 import LeadModal from './LeadModal';
 
 const Services: React.FC = () => {
@@ -23,7 +24,10 @@ const Services: React.FC = () => {
                 type="button"
                 className="service-card"
                 key={s.key}
-                onClick={() => setActiveService(s.title)}
+                onClick={() => {
+                  track('service_click', { service: s.title });
+                  setActiveService(s.title);
+                }}
                 aria-label={`Розрахувати вартість: ${s.title}`}
               >
                 <div className="service-card__img">

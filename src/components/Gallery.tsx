@@ -41,7 +41,10 @@ const Gallery: React.FC = () => {
         </div>
 
         <div className="gallery__cta">
-          <button className="btn" onClick={() => scrollToForm()}>
+          <button
+            className="btn"
+            onClick={() => scrollToForm(undefined, 'gallery')}
+          >
             Хочу так само — замовити консультацію
           </button>
         </div>

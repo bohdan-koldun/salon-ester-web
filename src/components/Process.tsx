@@ -38,7 +38,10 @@ const Process: React.FC = () => {
         </div>
 
         <div className="process__cta">
-          <button className="btn" onClick={() => scrollToForm()}>
+          <button
+            className="btn"
+            onClick={() => scrollToForm(undefined, 'process')}
+          >
             Починається із заявки →
           </button>
         </div>

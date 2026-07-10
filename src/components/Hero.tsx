@@ -24,7 +24,10 @@ const Hero: React.FC = () => (
         <p className="hero__sub">
           Виїзд дизайнера, індивідуальний проєкт, пошив та монтаж під ключ.
         </p>
-        <button className="btn hero__cta" onClick={() => scrollToForm()}>
+        <button
+          className="btn hero__cta"
+          onClick={() => scrollToForm(undefined, 'hero')}
+        >
           Розрахувати вартість
         </button>
         <p className="hero__micro">

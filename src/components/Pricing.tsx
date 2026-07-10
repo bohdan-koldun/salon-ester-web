@@ -8,7 +8,10 @@ const Pricing: React.FC = () => (
       <h2>{pricing.title}</h2>
       <p className="pricing__text">{pricing.text}</p>
       <div className="pricing__cta">
-        <button className="btn btn--light" onClick={() => scrollToForm()}>
+        <button
+          className="btn btn--light"
+          onClick={() => scrollToForm(undefined, 'pricing')}
+        >
           Розрахувати вартість
         </button>
       </div>
