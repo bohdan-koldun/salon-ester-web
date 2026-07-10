@@ -1262,10 +1262,10 @@ h3 {
   z-index: 1000;
   height: 56px;
   background: var(--c-white);
-  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 -1pfx 4px rgba(0, 0, 0, 0.08);
   display: flex;
   gap: 8px;
-  padding: 7px 16px;
+  padding: 4px 24px 10px;
 }
 
 .mobile-bar a,
