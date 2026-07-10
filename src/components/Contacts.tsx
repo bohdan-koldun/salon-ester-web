@@ -35,7 +35,6 @@ const Contacts: React.FC = () => {
               >
                 {contacts.phone}
               </a>
-              {' · '}
             </p>
 
             {hours ? (
