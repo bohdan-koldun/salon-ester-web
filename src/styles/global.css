@@ -531,8 +531,34 @@ h3 {
 }
 
 .service-card__img {
+  position: relative;
   aspect-ratio: 4 / 3;
   background: var(--c-bg-alt);
+  overflow: hidden;
+}
+
+.service-card__img .gatsby-image-wrapper {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+/* М'який градієнт знизу — глибина й плавний перехід у тіло картки */
+.service-card__img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(44, 44, 44, 0.22),
+    rgba(44, 44, 44, 0) 42%
+  );
+  pointer-events: none;
+}
+
+.service-card:hover .service-card__img .gatsby-image-wrapper,
+.service-card:focus-visible .service-card__img .gatsby-image-wrapper {
+  transform: scale(1.05);
 }
 
 .service-card h3 {
@@ -557,22 +583,40 @@ h3 {
 }
 
 /* ── Fabrics ── */
+/* На мобільному — горизонтальна карусель зі snap; на десктопі — сітка. */
 .fabrics-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
   gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  /* Вихід за поля секції, щоб карусель тяглася від краю до краю */
+  margin-inline: -24px;
+  padding: 4px 24px 14px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.fabrics-grid::-webkit-scrollbar {
+  display: none;
 }
 
 @media (min-width: 768px) {
   .fabrics-grid {
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 28px;
+    margin-inline: 0;
+    padding: 0;
+    overflow: visible;
   }
 }
 
 .fabric-card {
   display: flex;
   flex-direction: column;
+  /* Ширина картки в каруселі: видно край наступної → зрозуміло, що є свайп */
+  flex: 0 0 76%;
+  scroll-snap-align: start;
   width: 100%;
   padding: 0;
   text-align: left;
