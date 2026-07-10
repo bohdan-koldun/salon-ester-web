@@ -18,6 +18,12 @@ if (!empty($_POST['company'])) {
     exit;
 }
 
+// Сповіщення про «гарячий» клік (телефон/месенджер) — легке повідомлення без email.
+if (($_POST['type'] ?? 'lead') === 'click') {
+    handle_click_notification($botToken, $chatId);
+    exit;
+}
+
 $phone = clean_input($_POST['phone'] ?? '');
 if (mb_strlen($phone) <= 5) {
     http_response_code(422);
@@ -45,6 +51,39 @@ $okTelegram = send_to_telegram($botToken, $chatId, $text);
 send_email($leadEmail, "Новий лід: $form. $name", $text);
 
 echo json_encode(['ok' => $okTelegram]);
+
+// ─── Сповіщення про клік ─────────────────────────────────────
+
+function handle_click_notification($token, $chatId) {
+    $channel = clean_input($_POST['channel'] ?? '');
+    $source  = clean_input($_POST['source'] ?? '');
+    $pageUrl = clean_input($_POST['url'] ?? '');
+
+    $labels = [
+        'phone'    => '📞 Телефон',
+        'viber'    => '🟣 Viber',
+        'telegram' => '🔵 Telegram',
+        'whatsapp' => '🟢 WhatsApp',
+    ];
+    if (!isset($labels[$channel])) {
+        http_response_code(422);
+        echo json_encode(['ok' => false, 'error' => 'channel']);
+        return;
+    }
+
+    $action = $channel === 'phone' ? 'зараз може подзвонити' : 'зараз може написати';
+
+    $lines = array_filter([
+        '<b>👀 Клік по контакту — Естер</b>',
+        "<u>Канал</u>: {$labels[$channel]}",
+        "Відвідувач клікнув — $action.",
+        not_empty($source)  ? "<u>Місце</u>: $source"     : null,
+        not_empty($pageUrl) ? "<u>Сторінка</u>: $pageUrl" : null,
+    ]);
+
+    $ok = send_to_telegram($token, $chatId, implode("\n\n", $lines));
+    echo json_encode(['ok' => $ok]);
+}
 
 // ─── Доставка ────────────────────────────────────────────────
 
