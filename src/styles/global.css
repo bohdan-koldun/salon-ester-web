@@ -1225,6 +1225,7 @@ h3 {
 
 .contacts__messengers {
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
   margin-top: 20px;
 }
@@ -1359,12 +1360,31 @@ h3 {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
+.messenger__item svg {
+  display: block;
+}
+
 .messenger__item--viber {
   background: #7360f2;
 }
 
 .messenger__item--telegram {
   background: #28a8e9;
+}
+
+.messenger__item--whatsapp {
+  background: #25d366;
+}
+
+.messenger__item--instagram {
+  background: radial-gradient(
+    circle at 30% 107%,
+    #fdf497 0%,
+    #fdf497 5%,
+    #fd5949 45%,
+    #d6249f 60%,
+    #285aeb 90%
+  );
 }
 
 /* ── Popup / Modal ── */
