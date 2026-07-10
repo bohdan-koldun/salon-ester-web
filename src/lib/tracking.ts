@@ -22,7 +22,7 @@ function notifyContactClick(channel: string, source?: string) {
     type: 'click',
     channel,
     source: source ?? '',
-    url: window.location.href,
+    url: window.location.pathname + window.location.search + window.location.hash,
   }).toString();
 
   // sendBeacon переживає перехід у дзвонилку/застосунок месенджера, на відміну від fetch.
