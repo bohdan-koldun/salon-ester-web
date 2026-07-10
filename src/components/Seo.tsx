@@ -150,6 +150,18 @@ const Seo: React.FC = () => (
     <meta name="description" content={description} />
     <link rel="canonical" href={`${site.url}/`} />
 
+    {/* Шрифти: preconnect + stylesheet у <head> замість @import (швидший рендер, менше FOUT) */}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossOrigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+    />
+
     <link rel="icon" href="/favicons/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />

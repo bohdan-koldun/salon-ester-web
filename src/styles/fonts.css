@@ -1,1 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap");
+/* Шрифти підключаються через <link> у <head> (див. src/components/Seo.tsx):
+   preconnect + stylesheet дають швидший рендер і менше FOUT, ніж @import.
+   Файл лишено навмисно порожнім, щоб не ламати імпорт у gatsby-browser.ts. */
