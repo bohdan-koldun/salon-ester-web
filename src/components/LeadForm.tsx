@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { serviceOptions, writeReviewUrl } from '../lib/config';
+import {serviceOptions, viewReviewsUrl, writeReviewUrl} from '../lib/config';
 import { useLeadForm } from '../lib/useLeadForm';
 import { PREFILL_EVENT, type FormPrefill } from '../lib/scroll';
 
@@ -37,11 +37,11 @@ const LeadForm: React.FC = () => {
             <div className="form-success__divider">Були у нас раніше?</div>
             <a
               className="btn btn--ghost"
-              href={writeReviewUrl}
+              href={viewReviewsUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
-              Залишити відгук на Google →
+              Відгуки на Google →
             </a>
           </div>
         ) : (
@@ -102,7 +102,7 @@ const LeadForm: React.FC = () => {
                 <label htmlFor="lf-comment">Коментар</label>
                 <textarea
                   id="lf-comment"
-                  placeholder="Опишіть ваше завдання (необов'язково)"
+                  placeholder="Опишіть ваше завдання (необов’язково)"
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
                 />
