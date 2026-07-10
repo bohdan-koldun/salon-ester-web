@@ -5,7 +5,10 @@ const ENDPOINT = '/lead.php';
 
 export async function submitLead(payload: LeadPayload): Promise<SubmitResult> {
   const url =
-    payload.url ?? (typeof window !== 'undefined' ? window.location.href : '');
+    payload.url ??
+    (typeof window !== 'undefined'
+      ? window.location.pathname + window.location.search + window.location.hash
+      : '');
 
   const body = new URLSearchParams({
     name: payload.name,
