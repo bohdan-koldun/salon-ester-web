@@ -38,6 +38,8 @@ export const contacts = {
   email: 'info@estershtory.kyiv.ua',
   viber: 'viber://chat?number=%2B380972402303',
   telegram: 'https://t.me/+380972402303',
+  whatsapp: 'https://wa.me/380972402303',
+  instagram: 'https://www.instagram.com/liudmilakoldun_0972402303/',
   // Google Maps embed: вставте координати/адресу салону
   mapEmbed:
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d65312.33145699416!2d30.485653529010673!3d50.50986447804213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4cf007145cff1%3A0xa5249350f032d0c0!2z0KHQsNC70L7QvSDRiNGC0L7RgCDCq9CV0YHRgtC10YDCuw!5e1!3m2!1sen!2sua!4v1783113479781!5m2!1sen!2sua',
