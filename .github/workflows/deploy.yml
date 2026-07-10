@@ -65,7 +65,7 @@ jobs:
 
       - name: Upload to FTP
         run: |
-          lftp -c "open -u ${{ secrets.FTP_USER }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }}; mirror -R --delete --verbose --parallel=10 --use-pget-n=5 public www; quit"
+          lftp -c "open -u ${{ secrets.FTP_USER }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }}; mirror -R --delete --verbose --parallel=10 public www; quit"
 
       - name: Send success notification
         uses: appleboy/telegram-action@master
