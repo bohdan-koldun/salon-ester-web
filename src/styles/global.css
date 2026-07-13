@@ -1577,14 +1577,15 @@ h3 {
 
 /* ── Блог: список статей ── */
 .blog-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
 .blog-card {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: stretch;
   width: 100%;
   padding: 0;
   text-align: left;
@@ -1610,8 +1611,8 @@ h3 {
 
 .blog-card__img {
   position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;
+  flex: 0 0 120px;
+  aspect-ratio: 1 / 1;
   background: var(--c-bg-alt);
   overflow: hidden;
 }
@@ -1621,20 +1622,49 @@ h3 {
   height: 100%;
 }
 
+.blog-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  padding: 14px 16px;
+}
+
 .blog-card h2 {
-  margin: 20px 20px 0;
-  font-size: 22px;
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.3;
 }
 
 .blog-card p {
-  margin: 8px 20px 0;
+  display: none;
+  margin-top: 6px;
   color: var(--c-text-muted);
   flex: 1;
 }
 
 .blog-card .link-cta {
-  margin: 16px 20px 20px;
+  margin-top: 10px;
   align-self: flex-start;
+}
+
+@media (min-width: 560px) {
+  .blog-card__img {
+    flex-basis: 220px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .blog-card__body {
+    padding: 20px 24px;
+  }
+
+  .blog-card h2 {
+    font-size: 22px;
+  }
+
+  .blog-card p {
+    display: block;
+  }
 }
 
 /* ── Блог: сторінка статті ── */
@@ -1659,7 +1689,6 @@ h3 {
   margin: 0 auto 48px;
   border-radius: var(--r-card);
   overflow: hidden;
-  aspect-ratio: 16 / 9;
 }
 
 .blog-article__body {

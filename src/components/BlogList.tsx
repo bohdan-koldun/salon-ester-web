@@ -30,11 +30,13 @@ const BlogList: React.FC = () => {
                 <div className="blog-card__img">
                   {img && <GatsbyImage image={img} alt={post.imageAlt} />}
                 </div>
-                <h2>{post.title}</h2>
-                <p>{post.intro}</p>
-                <span className="link-cta" aria-hidden="true">
-                  Читати →
-                </span>
+                <div className="blog-card__body">
+                  <h2>{post.title}</h2>
+                  <p>{post.intro}</p>
+                  <span className="link-cta" aria-hidden="true">
+                    Читати →
+                  </span>
+                </div>
               </Link>
             );
           })}
