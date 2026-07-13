@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'gatsby';
 import { site, contacts } from '../lib/config';
 import { track } from '../lib/tracking';
 import { canDial } from '../lib/device';
@@ -8,11 +9,14 @@ interface Props {
   onCallback: () => void;
 }
 
+// Абсолютні шляхи (не просто «#hash»), щоб посилання коректно вели на головну
+// й туди ж скролили, навіть якщо клік стався зі сторінки блогу.
 const navLinks = [
-  { href: '#services', label: 'Послуги' },
-  { href: '#gallery', label: 'Галерея' },
-  { href: '#reviews', label: 'Відгуки' },
-  { href: '#contacts', label: 'Контакти' },
+  { href: '/#services', label: 'Послуги' },
+  { href: '/#gallery', label: 'Галерея' },
+  { href: '/#reviews', label: 'Відгуки' },
+  { href: '/blog/', label: 'Блог' },
+  { href: '/#contacts', label: 'Контакти' },
 ];
 
 const Header: React.FC<Props> = ({ onCallback }) => {
@@ -41,16 +45,16 @@ const Header: React.FC<Props> = ({ onCallback }) => {
   return (
     <header className={`header${scrolled ? ' header--scrolled' : ''}`}>
       <div className="header__inner">
-        <a href="#top" className="logo" aria-label={site.name}>
+        <Link to="/#top" className="logo" aria-label={site.name}>
           <span className="logo__name">{site.name}</span>
           <span className="logo__tag">{site.tagline}</span>
-        </a>
+        </Link>
 
         <nav className="header__nav">
           {navLinks.map((l) => (
-            <a key={l.href} href={l.href}>
+            <Link key={l.href} to={l.href}>
               {l.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -89,9 +93,9 @@ const Header: React.FC<Props> = ({ onCallback }) => {
 
       <div className={`drawer${menuOpen ? ' drawer--open' : ''}`}>
         {navLinks.map((l) => (
-          <a key={l.href} href={l.href} onClick={closeMenu}>
+          <Link key={l.href} to={l.href} onClick={closeMenu}>
             {l.label}
-          </a>
+          </Link>
         ))}
         <button
           className="btn"

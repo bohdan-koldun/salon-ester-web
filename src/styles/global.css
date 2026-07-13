@@ -1575,3 +1575,139 @@ h3 {
   line-height: 1.65;
 }
 
+/* ── Блог: список статей ── */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  text-align: left;
+  background: var(--c-white);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.blog-card:hover,
+.blog-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--c-accent);
+  box-shadow: 0 12px 28px rgba(44, 44, 44, 0.08);
+}
+
+.blog-card:hover .link-cta,
+.blog-card:focus-visible .link-cta {
+  gap: 12px;
+  color: var(--c-accent-h);
+}
+
+.blog-card__img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--c-bg-alt);
+  overflow: hidden;
+}
+
+.blog-card__img .gatsby-image-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.blog-card h2 {
+  margin: 20px 20px 0;
+  font-size: 22px;
+}
+
+.blog-card p {
+  margin: 8px 20px 0;
+  color: var(--c-text-muted);
+  flex: 1;
+}
+
+.blog-card .link-cta {
+  margin: 16px 20px 20px;
+  align-self: flex-start;
+}
+
+/* ── Блог: сторінка статті ── */
+.blog-article__head {
+  max-width: 720px;
+  margin: 0 auto 32px;
+  text-align: center;
+}
+
+.blog-article__head .eyebrow {
+  margin-bottom: 8px;
+}
+
+.blog-article__intro {
+  margin-top: 16px;
+  color: var(--c-text-muted);
+  font-size: var(--fs-lg);
+}
+
+.blog-article__hero {
+  max-width: 880px;
+  margin: 0 auto 48px;
+  border-radius: var(--r-card);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+
+.blog-article__body {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.blog-article__body section {
+  margin-bottom: 40px;
+}
+
+.blog-article__body h2 {
+  margin-bottom: 16px;
+}
+
+.blog-article__body p {
+  margin-top: 12px;
+  color: var(--c-text-muted);
+  line-height: var(--lh-body);
+}
+
+.blog-article__list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.blog-article__list li {
+  position: relative;
+  padding-left: 24px;
+  color: var(--c-text-muted);
+  line-height: var(--lh-body);
+}
+
+.blog-article__list li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c-accent);
+}
+
+.blog-article__cta {
+  text-align: center;
+  margin-top: 48px;
+}
+
