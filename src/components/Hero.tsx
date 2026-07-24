@@ -1,6 +1,6 @@
 import React from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
-import { stats } from '../lib/config';
+import { stats, pricing } from '../lib/config';
 import { scrollToForm } from '../lib/scroll';
 
 const Hero: React.FC = () => (
@@ -20,10 +20,20 @@ const Hero: React.FC = () => (
 
     <div className="hero__inner">
       <div className="hero__content">
+        {pricing.badge && <span className="hero__badge">{pricing.badge}</span>}
         <h1>Штори на замовлення в Києві</h1>
         <p className="hero__sub">
           Виїзд дизайнера, індивідуальний проєкт, пошив та монтаж під ключ.
         </p>
+        {pricing.items.length > 0 && (
+          <p className="hero__prices">
+            {pricing.items.map((item) => (
+              <span className="hero__price" key={item.label}>
+                {item.label} <strong>{item.price}</strong>/{item.unitShort}
+              </span>
+            ))}
+          </p>
+        )}
         <button
           className="btn hero__cta"
           onClick={() => scrollToForm(undefined, 'hero')}
