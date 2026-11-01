@@ -10,7 +10,7 @@ const Services: React.FC = () => {
   const [activeService, setActiveService] = useState<string | null>(null);
 
   return (
-    <section className="section section--bg" id="services">
+    <section className="section section--alt" id="services">
       <div className="container">
         <div className="section__head">
           <h2>Що ми робимо</h2>
@@ -33,10 +33,18 @@ const Services: React.FC = () => {
                 <div className="service-card__img">
                   {img && <GatsbyImage image={img} alt={s.title} />}
                 </div>
-                <h3>{s.title}</h3>
+                <div className="service-card__head">
+                  <h3>{s.title}</h3>
+                  {s.price && (
+                    <span className="service-card__price">{s.price}</span>
+                  )}
+                </div>
                 <p>{s.desc}</p>
-                <span className="link-cta" aria-hidden="true">
-                  Дізнатись вартість →
+                <span
+                  className="btn btn--ghost service-card__cta"
+                  aria-hidden="true"
+                >
+                  Розрахувати вартість
                 </span>
               </button>
             );

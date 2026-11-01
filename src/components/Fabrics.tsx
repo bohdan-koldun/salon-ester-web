@@ -10,7 +10,7 @@ const Fabrics: React.FC = () => {
   const [activeFabric, setActiveFabric] = useState<string | null>(null);
 
   return (
-    <section className="section section--alt" id="fabrics">
+    <section className="section section--bg" id="fabrics">
       <div className="container">
         <div className="section__head">
           <h2>Фактури тканин</h2>

@@ -1,10 +1,16 @@
 import React from 'react';
-import { site } from '../lib/config';
+import { site, contacts, currentYear } from '../lib/config';
+import { track } from '../lib/tracking';
 
 const Footer: React.FC = () => (
   <footer className="footer">
-    © 2026 Салон штор «{site.name}»&nbsp; · &nbsp;Київ&nbsp; · &nbsp;
-    {site.domain}
+    © {currentYear} Салон штор «{site.name}»&nbsp; · &nbsp;Київ&nbsp; · &nbsp;
+    <a
+      href={`tel:${contacts.phoneTel}`}
+      onClick={() => track('phone_click', { source: 'footer' })}
+    >
+      {contacts.phone}
+    </a>
   </footer>
 );
 

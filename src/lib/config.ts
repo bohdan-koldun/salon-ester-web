@@ -35,11 +35,16 @@ export const contacts = {
   phoneTel: '+380972402303',
   address: 'м. Київ, проспект Степана Бандери, 34а, гіпермаркет меблів MARGO',
   schedule: 'Пн–Пт 10:00–19:00 · Сб–Нд 10:00–19:00',
+  scheduleShort: 'Щодня 10:00–19:00',
+  // Робочі години (за Києвом) — для індикатора «зараз працюємо» у хедері
+  openHours: { from: 10, to: 19 },
   email: 'info@estershtory.kyiv.ua',
   viber: 'viber://chat?number=%2B380972402303',
   telegram: 'https://t.me/+380972402303',
   whatsapp: 'https://wa.me/380972402303',
   instagram: 'https://www.instagram.com/liudmilakoldun_0972402303/',
+  // Кнопка «Прокласти маршрут»
+  mapsRoute: `https://www.google.com/maps/dir/?api=1&destination=${geo.lat},${geo.lng}`,
   // Google Maps embed: вставте координати/адресу салону
   mapEmbed:
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d65312.33145699416!2d30.485653529010673!3d50.50986447804213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4cf007145cff1%3A0xa5249350f032d0c0!2z0KHQsNC70L7QvSDRiNGC0L7RgCDCq9CV0YHRgtC10YDCuw!5e1!3m2!1sen!2sua!4v1783113479781!5m2!1sen!2sua',
@@ -56,16 +61,30 @@ export interface PriceItem {
 export const currentYear = new Date().getFullYear();
 
 export const pricing = {
-  badge: `Кращі ціни на ${currentYear} рік`,
-  title: 'Прозорий розрахунок вартості',
-  text: 'Порахуємо ваш проєкт чесно й детально — за розмірами, тканинами та роботою. Ви знаєте ціну ще до замовлення, без прихованих доплат. Залиште заявку — і ми підберемо рішення під ваш бюджет.',
-  // Орієнтовні стартові ціни «від». Фінальна вартість рахується індивідуально після заміру.
+  // Орієнтовні стартові ціни «від» (чипи в hero). Фінальна вартість рахується індивідуально після заміру.
   items: [
     { label: 'Тюль', price: 'від 450 грн', unit: 'за пог. метр', unitShort: 'м.п.' },
     { label: 'Штори', price: 'від 675 грн', unit: 'за пог. метр', unitShort: 'м.п.' },
   ] as PriceItem[],
-  itemsNote: 'Орієнтовні ціни «від». Точну вартість рахуємо після заміру — залежно від розміру вікна, тканини та складності моделі.',
 };
+
+// Смуга довіри під hero
+export interface TrustItem {
+  icon: 'pin' | 'scissors' | 'ruler' | 'tool';
+  title: string;
+  text: string;
+}
+
+export const trustItems: TrustItem[] = [
+  { icon: 'pin', title: 'Салон у MARGO', text: 'пр. Степана Бандери, 34а' },
+  {
+    icon: 'scissors',
+    title: 'Власний цех',
+    text: 'шиємо самі, без посередників',
+  },
+  { icon: 'ruler', title: 'Виїзд на замір', text: 'зі зразками тканин' },
+  { icon: 'tool', title: 'Монтаж під ключ', text: 'карнизи, навішування' },
+];
 
 // Google
 export const google = {
@@ -89,6 +108,7 @@ export interface Service {
   title: string;
   desc: string;
   image: string; // ім'я файлу у src/images/services/
+  price?: string; // ціна «від» на картці (необов'язково)
 }
 
 export const services: Service[] = [
@@ -97,6 +117,7 @@ export const services: Service[] = [
     title: 'Класичні штори',
     desc: "Індивідуальний пошив будь-якої складності під ваш стиль та інтер'єр.",
     image: 'service-curtains.png',
+    price: 'від 675 грн/м.п.',
   },
   {
     key: 'roman',
@@ -256,16 +277,35 @@ export const faq: Faq[] = [
   },
 ];
 
-// Опції select у формах (включно з «Інше»)
-export const serviceOptions = [
-  'Класичні штори',
-  'Римські штори',
-  'Рулонні штори',
-  'Штори плісе',
-  'Штори на люверсах',
-  'Зовнішні ролети',
-  'Жалюзі',
-  'Текстиль',
-  'Карнизи та монтаж',
-  'Інше',
-];
+// Відгуки на випадок, коли Google Places API недоступний (немає ключа/placeId).
+// Копіюйте ЛИШЕ реальні відгуки з профілю Google — дослівно, з іменем автора.
+export interface StaticReview {
+  author: string;
+  text: string;
+}
+
+export const fallbackReviews: StaticReview[] = [];
+
+// Квіз «Розрахунок за 3 кроки» (основна форма #form).
+// `services` — назви послуг (з blog.ts / scrollToForm), які обирають цей варіант.
+export const quiz = {
+  products: [
+    {
+      label: 'Штори',
+      services: ['Класичні штори', 'Штори на люверсах', 'Текстиль'],
+    },
+    { label: 'Тюль', services: [] },
+    { label: 'Римські', services: ['Римські штори'] },
+    { label: 'Рулонні / плісе', services: ['Рулонні штори', 'Штори плісе'] },
+    { label: 'Жалюзі, ролети', services: ['Жалюзі', 'Зовнішні ролети'] },
+    { label: 'Ще не знаю', services: [] },
+  ],
+  rooms: ['Вітальня', 'Спальня', 'Дитяча', 'Кухня', 'Офіс', 'Інше'],
+  windows: ['1', '2', '3', '4+'],
+  channels: ['Дзвінок', 'Viber', 'Telegram'],
+  nextSteps: [
+    'Передзвонимо в робочий час',
+    'Узгодимо виїзд на замір або візит у салон',
+    'Назвемо точну вартість до пошиву',
+  ],
+};

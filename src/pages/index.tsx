@@ -8,27 +8,23 @@ import Services from '../components/Services';
 import Fabrics from '../components/Fabrics';
 import Process from '../components/Process';
 import Gallery from '../components/Gallery';
-import Pricing from '../components/Pricing';
 import Reviews from '../components/Reviews';
 import Faq from '../components/Faq';
 import LeadForm from '../components/LeadForm';
 import Contacts from '../components/Contacts';
-import Divider from '../components/Divider';
 import Seo from '../components/Seo';
 
 const IndexPage: React.FC = () => (
   <Layout>
     <Hero />
     <Trust />
+    <Reviews />
     <Services />
     <Fabrics />
-    <Process />
     <Gallery />
-    <Pricing />
-    <Reviews />
-    <Faq />
-    <Divider />
+    <Process />
     <LeadForm />
+    <Faq />
     <Contacts />
   </Layout>
 );

@@ -17,7 +17,7 @@ npm run clean        # gatsby clean (за дивних помилок кешу)
 ## Архітектура
 
 - **Єдине джерело даних клієнта — [src/lib/config.ts](src/lib/config.ts).** Тексти, контакти, послуги, акція, статистика, галерея. Не хардкодь ці значення в компонентах — додавай/читай із config.
-- **Секції збираються в [src/pages/index.tsx](src/pages/index.tsx)** у порядку: Hero → Trust → Services → Process → Gallery → Promo → Reviews → Divider → LeadForm → Contacts.
+- **Секції збираються в [src/pages/index.tsx](src/pages/index.tsx)** у порядку: Hero (з формою «лише телефон») → Trust → Reviews → Services → Fabrics → Gallery → Process → LeadForm (3-кроковий квіз) → Faq → Contacts.
 - **Зображення динамічні**: [src/lib/useImages.ts](src/lib/useImages.ts) будує мапу `relativePath → GatsbyImageData`. Послуги шукаються за `services/<file>`, галерея — за `gallery/<file>`. Імена файлів задаються в config. Hero використовує `StaticImage` (літеральний шлях).
 - **Логіка форм спільна**: [src/lib/useLeadForm.ts](src/lib/useLeadForm.ts) (стан + сабміт) і [src/components/LeadModal.tsx](src/components/LeadModal.tsx) (UI попапів). Основна форма — [LeadForm.tsx](src/components/LeadForm.tsx). Усі форми шлють на `/lead.php` через [submitLead.ts](src/lib/leads/submitLead.ts).
 - **Скрол до форми з контекстом**: `scrollToForm({ service, message })` із [src/lib/scroll.ts](src/lib/scroll.ts) кидає подію, яку слухає LeadForm і заповнює select/коментар.
