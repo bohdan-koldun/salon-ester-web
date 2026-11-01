@@ -20,7 +20,10 @@ export function scrollToForm(prefill?: FormPrefill, source = 'cta') {
       new CustomEvent<FormPrefill>(PREFILL_EVENT, { detail: prefill })
     );
   }
-  const el = document.getElementById('form');
+  // Одразу до картки квізу — на мобільному вступ секції лишається вище
+  const el =
+    document.querySelector('#form .lead__card') ??
+    document.getElementById('form');
   if (el) {
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }

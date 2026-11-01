@@ -35,6 +35,7 @@ const Chips: React.FC<ChipsProps> = ({ options, value, onChange, grid }) => (
 );
 
 const STEP_TITLES = ['Що потрібно?', 'Розміри', 'Куди надіслати?'];
+const NOT_SURE = quiz.products[quiz.products.length - 1].label; // «Ще не знаю»
 
 const LeadForm: React.FC = () => {
   const [step, setStep] = useState<1 | 2 | 3>(1);
@@ -71,14 +72,16 @@ const LeadForm: React.FC = () => {
       const detail = (e as CustomEvent<FormPrefill>).detail;
       if (!detail) return;
       const matched = detail.service && productForService(detail.service);
-      if (matched) setProduct(matched);
-      const extra = [
-        !matched && detail.service ? `Послуга: ${detail.service}` : '',
-        detail.message ?? '',
-      ]
-        .filter(Boolean)
-        .join('. ');
-      if (extra) setComment((c) => c || extra);
+      // Послуга без відповідника (карнизи, текстиль) → «Ще не знаю» + назва в коментар
+      if (detail.service) setProduct(matched || NOT_SURE);
+      setComment(
+        [
+          !matched && detail.service ? `Послуга: ${detail.service}` : '',
+          detail.message ?? '',
+        ]
+          .filter(Boolean)
+          .join('. ')
+      );
       setStep(1);
     };
     window.addEventListener(PREFILL_EVENT, onPrefill);

@@ -41,7 +41,7 @@ const jsonLd = {
       },
       image: ogImage,
       email: contacts.email,
-      telephone: contacts.phone,
+      telephone: contacts.phoneTel,
       ...(sameAs.length ? { sameAs } : {}),
     },
     {
@@ -58,7 +58,7 @@ const jsonLd = {
       name: 'Салон штор «Естер»',
       description,
       url: site.url,
-      telephone: contacts.phone,
+      telephone: contacts.phoneTel,
       email: contacts.email,
       image: ogImage,
       logo,
