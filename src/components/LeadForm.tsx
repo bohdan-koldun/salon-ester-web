@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useId, useState } from 'react';
 import { quiz, services, viewReviewsUrl } from '../lib/config';
 import { useLeadForm } from '../lib/useLeadForm';
 import { track } from '../lib/tracking';
@@ -34,6 +34,23 @@ const Chips: React.FC<ChipsProps> = ({ options, selected, onPick, grid }) => (
     ))}
   </div>
 );
+
+// Група питання квізу. Не <fieldset>: у WebKit (iPhone) fieldset не перераховує
+// висоту після підвантаження шрифту — картка лишалась вищою до першого кліку.
+const QuizGroup: React.FC<{
+  title: React.ReactNode;
+  children: React.ReactNode;
+}> = ({ title, children }) => {
+  const id = useId();
+  return (
+    <div className="quiz__group" role="group" aria-labelledby={id}>
+      <div className="quiz__legend" id={id}>
+        {title}
+      </div>
+      {children}
+    </div>
+  );
+};
 
 const STEP_TITLES = ['Що потрібно?', 'Розміри', 'Куди надіслати?'];
 
@@ -196,29 +213,35 @@ const LeadForm: React.FC = () => {
 
               {step === 1 ? (
                 <>
-                  <fieldset className="quiz__group">
-                    <legend>
-                      Що хочете замовити?{' '}
-                      <span className="quiz__legend-note">можна кілька</span>
-                    </legend>
+                  <QuizGroup
+                    title={
+                      <>
+                        Що хочете замовити?{' '}
+                        <span className="quiz__legend-note">можна кілька</span>
+                      </>
+                    }
+                  >
                     <Chips
                       grid
                       options={PRODUCT_OPTIONS}
                       selected={products}
                       onPick={toggleProduct}
                     />
-                  </fieldset>
-                  <fieldset className="quiz__group">
-                    <legend>
-                      Для яких кімнат?{' '}
-                      <span className="quiz__legend-note">можна кілька</span>
-                    </legend>
+                  </QuizGroup>
+                  <QuizGroup
+                    title={
+                      <>
+                        Для яких кімнат?{' '}
+                        <span className="quiz__legend-note">можна кілька</span>
+                      </>
+                    }
+                  >
                     <Chips
                       options={quiz.rooms}
                       selected={rooms}
                       onPick={toggleRoom}
                     />
-                  </fieldset>
+                  </QuizGroup>
                   <button
                     type="button"
                     className="btn btn--block btn--lg"
@@ -229,8 +252,7 @@ const LeadForm: React.FC = () => {
                 </>
               ) : step === 2 ? (
                 <>
-                  <fieldset className="quiz__group">
-                    <legend>Розміри вікна, см</legend>
+                  <QuizGroup title="Розміри вікна, см">
                     <p className="quiz__hint">
                       Можна приблизно й одного вікна — решту уточнимо на замірі.
                       Ширина — довжина карниза (або вікна), висота — від карниза
@@ -273,16 +295,15 @@ const LeadForm: React.FC = () => {
                       />
                       Не знаю розмірів — потрібен замір
                     </label>
-                  </fieldset>
+                  </QuizGroup>
 
-                  <fieldset className="quiz__group">
-                    <legend>Скільки вікон загалом?</legend>
+                  <QuizGroup title="Скільки вікон загалом?">
                     <Chips
                       options={quiz.windows}
                       selected={[windows]}
                       onPick={setWindows}
                     />
-                  </fieldset>
+                  </QuizGroup>
 
                   {sizesError && (
                     <div className="form__error">
@@ -314,15 +335,14 @@ const LeadForm: React.FC = () => {
                     />
                   </div>
 
-                  <fieldset className="quiz__group">
-                    <legend>Як зручніше отримати розрахунок?</legend>
+                  <QuizGroup title="Як зручніше отримати розрахунок?">
                     <Chips
                       grid
                       options={quiz.channels}
                       selected={[channel]}
                       onPick={setChannel}
                     />
-                  </fieldset>
+                  </QuizGroup>
 
                   {comment && (
                     <div className="field">

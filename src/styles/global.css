@@ -1671,11 +1671,7 @@ h3 {
   transition: width 0.3s;
 }
 
-.quiz__group {
-  border: 0;
-}
-
-.quiz__group legend {
+.quiz__legend {
   margin-bottom: 12px;
   font-size: var(--fs-lg);
   font-weight: 600;
