@@ -39,9 +39,9 @@ const STEP_TITLES = ['Що потрібно?', 'Розміри', 'Куди на�
 
 const LeadForm: React.FC = () => {
   const [step, setStep] = useState<1 | 2 | 3>(1);
+  // Нічого не обрано наперед і нічого не обов'язково: мета — контакт, деталі уточнимо
   const [products, setProducts] = useState<string[]>([]);
-  const [productsError, setProductsError] = useState(false);
-  const [room, setRoom] = useState(quiz.rooms[0]);
+  const [rooms, setRooms] = useState<string[]>([]);
   const [width, setWidth] = useState('');
   const [height, setHeight] = useState('');
   const [windows, setWindows] = useState(quiz.windows[0]);
@@ -53,23 +53,30 @@ const LeadForm: React.FC = () => {
   const sizes = noSizes ? 'потрібен замір' : `${width}×${height} см`;
   // У порядку варіантів, а не кліків
   const picked = PRODUCT_OPTIONS.filter((o) => products.includes(o));
+  const pickedRooms = quiz.rooms.filter((o) => rooms.includes(o));
+  const choice = [picked.join(', '), pickedRooms.join(', ')]
+    .filter(Boolean)
+    .join(' · ');
 
   // «Ще не знаю» виключний: знімає решту, а будь-який інший варіант знімає його
-  const toggleProduct = (o: string) => {
-    setProductsError(false);
+  const toggleProduct = (o: string) =>
     setProducts((cur) => {
       if (cur.includes(o)) return cur.filter((x) => x !== o);
       if (o === quiz.notSure) return [o];
       return [...cur.filter((x) => x !== quiz.notSure), o];
     });
-  };
+
+  const toggleRoom = (o: string) =>
+    setRooms((cur) =>
+      cur.includes(o) ? cur.filter((x) => x !== o) : [...cur, o]
+    );
 
   const form = useLeadForm({
     formName: 'Квіз: розрахунок вартості',
     buildMessage: () =>
       [
-        `Що: ${picked.map(fullName).join(', ')}`,
-        `Кімната: ${room}`,
+        `Що: ${picked.map(fullName).join(', ') || 'не вказано'}`,
+        `Кімнати: ${pickedRooms.join(', ') || 'не вказано'}`,
         `Розміри: ${sizes}`,
         `Вікон: ${windows}`,
         `Зв'язок: ${channel}`,
@@ -86,7 +93,6 @@ const LeadForm: React.FC = () => {
       if (!detail) return;
       const matched = services.find((s) => s.title === detail.service)?.short;
       if (matched) setProducts([matched]);
-      setProductsError(false);
       setComment(
         [
           !matched && detail.service ? `Послуга: ${detail.service}` : '',
@@ -102,11 +108,11 @@ const LeadForm: React.FC = () => {
   }, []);
 
   const goSizes = () => {
-    if (!products.length) {
-      setProductsError(true);
-      return;
-    }
-    track('quiz_step', { step: '2', product: picked.join(', '), room });
+    track('quiz_step', {
+      step: '2',
+      product: picked.join(', '),
+      room: pickedRooms.join(', '),
+    });
     setStep(2);
   };
 
@@ -149,7 +155,7 @@ const LeadForm: React.FC = () => {
               <h3>Дякуємо!</h3>
               <p>
                 Зв'яжемося з вами ({channel.toLowerCase()}) найближчим часом і
-                порахуємо ваш проєкт для кімнати «{room}».
+                порахуємо ваш проєкт.
               </p>
               <div className="form-success__divider">Були у нас раніше?</div>
               <a
@@ -174,7 +180,8 @@ const LeadForm: React.FC = () => {
               {step > 1 && (
                 <div className="quiz__summary">
                   <span>
-                    Ваш вибір: <strong>{picked.join(', ')}</strong> · {room}
+                    Ваш вибір:{' '}
+                    <strong>{choice || 'уточнимо по телефону'}</strong>
                     {step === 3 && ` · ${sizes}`}
                   </span>
                   <button
@@ -200,18 +207,16 @@ const LeadForm: React.FC = () => {
                       selected={products}
                       onPick={toggleProduct}
                     />
-                    {productsError && (
-                      <div className="form__error quiz__group-error">
-                        Оберіть, що потрібно, або «{quiz.notSure}».
-                      </div>
-                    )}
                   </fieldset>
                   <fieldset className="quiz__group">
-                    <legend>Для якої кімнати?</legend>
+                    <legend>
+                      Для яких кімнат?{' '}
+                      <span className="quiz__legend-note">можна кілька</span>
+                    </legend>
                     <Chips
                       options={quiz.rooms}
-                      selected={[room]}
-                      onPick={setRoom}
+                      selected={rooms}
+                      onPick={toggleRoom}
                     />
                   </fieldset>
                   <button
@@ -227,8 +232,9 @@ const LeadForm: React.FC = () => {
                   <fieldset className="quiz__group">
                     <legend>Розміри вікна, см</legend>
                     <p className="quiz__hint">
-                      Можна приблизно. Ширина — довжина карниза (або вікна),
-                      висота — від карниза до підлоги.
+                      Можна приблизно й одного вікна — решту уточнимо на замірі.
+                      Ширина — довжина карниза (або вікна), висота — від карниза
+                      до підлоги.
                     </p>
                     <div className="quiz__sizes">
                       <div className="field">
@@ -270,7 +276,7 @@ const LeadForm: React.FC = () => {
                   </fieldset>
 
                   <fieldset className="quiz__group">
-                    <legend>Скільки вікон?</legend>
+                    <legend>Скільки вікон загалом?</legend>
                     <Chips
                       options={quiz.windows}
                       selected={[windows]}
