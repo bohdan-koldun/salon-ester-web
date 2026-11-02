@@ -106,6 +106,7 @@ export const viewReviewsUrl = google.placeId
 export interface Service {
   key: string;
   title: string;
+  short: string; // коротка назва — варіант у квізі «Що хочете замовити?»
   desc: string;
   image: string; // ім'я файлу у src/images/services/
   price?: string; // ціна «від» на картці (необов'язково)
@@ -115,6 +116,7 @@ export const services: Service[] = [
   {
     key: 'curtains',
     title: 'Класичні штори',
+    short: 'Класичні штори',
     desc: "Індивідуальний пошив будь-якої складності під ваш стиль та інтер'єр.",
     image: 'service-curtains.png',
     price: 'від 675 грн/м.п.',
@@ -122,48 +124,56 @@ export const services: Service[] = [
   {
     key: 'roman',
     title: 'Римські штори',
+    short: 'Римські',
     desc: 'Елегантні тканинні панелі з рівними складками. Ідеально для невеликих вікон.',
     image: 'service-roman.png',
   },
   {
     key: 'roller',
     title: 'Рулонні штори',
+    short: 'Рулонні',
     desc: 'Практичне рішення для кухні, офісу чи балкона. Захист від сонця та стиль.',
     image: 'service-roller.png',
   },
   {
     key: 'pleat',
     title: 'Штори плісе',
+    short: 'Плісе',
     desc: 'Компактна система зі складками-гармошкою. Точно під розмір вікна, без провисань.',
     image: 'service-pleat.png',
   },
   {
     key: 'eyelet',
     title: 'Штори на люверсах',
+    short: 'На люверсах',
     desc: 'М’які рівні хвилі та легке ковзання по карнизу. Сучасний мінімалістичний вигляд.',
     image: 'service-eyelet.png',
   },
   {
     key: 'roller-outdoor',
     title: 'Зовнішні ролети',
+    short: 'Зовнішні ролети',
     desc: 'Захист вікна ззовні від сонця, вітру та сторонніх очей. Стійкі до негоди.',
     image: 'service-roller-outdoor.png',
   },
   {
     key: 'blinds',
     title: 'Жалюзі',
+    short: 'Жалюзі',
     desc: 'Дерев’яні та алюмінієві. Довговічні, прості в догляді.',
     image: 'service-blinds.png',
   },
   {
     key: 'textile',
     title: 'Текстиль для дому',
+    short: 'Текстиль',
     desc: 'Покривала, подушки, скатертини, чохли — в єдиному стилі зі шторами.',
     image: 'service-textile.png',
   },
   {
     key: 'cornices',
     title: 'Карнизи та монтаж',
+    short: 'Карнизи, монтаж',
     desc: 'Підбір, доставка та встановлення. Металеві, дерев’яні, профільні.',
     image: 'service-cornices.png',
   },
@@ -287,19 +297,14 @@ export interface StaticReview {
 export const fallbackReviews: StaticReview[] = [];
 
 // Квіз «Розрахунок за 3 кроки» (основна форма #form).
-// `services` — назви послуг (з blog.ts / scrollToForm), які обирають цей варіант.
 export const quiz = {
+  // «Що хочете замовити?» — ті самі послуги (короткі назви) + тюль; можна кілька
   products: [
-    {
-      label: 'Штори',
-      services: ['Класичні штори', 'Штори на люверсах'],
-    },
-    { label: 'Тюль', services: [] },
-    { label: 'Римські', services: ['Римські штори'] },
-    { label: 'Рулонні / плісе', services: ['Рулонні штори', 'Штори плісе'] },
-    { label: 'Жалюзі, ролети', services: ['Жалюзі', 'Зовнішні ролети'] },
-    { label: 'Ще не знаю', services: [] },
+    services[0].short,
+    'Тюль',
+    ...services.slice(1).map((s) => s.short),
   ],
+  notSure: 'Ще не знаю', // виключний варіант: знімає решту
   rooms: ['Вітальня', 'Спальня', 'Дитяча', 'Кухня', 'Офіс', 'Інше'],
   windows: ['1', '2', '3', '4+'],
   channels: ['Дзвінок', 'Viber', 'Telegram'],

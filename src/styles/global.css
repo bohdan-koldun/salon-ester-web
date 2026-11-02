@@ -1491,6 +1491,16 @@ h3 {
   font-weight: 600;
 }
 
+.quiz__legend-note {
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  color: var(--c-text-muted);
+}
+
+.quiz__group-error {
+  margin-top: 10px;
+}
+
 .quiz__hint {
   margin: -4px 0 12px;
   font-size: var(--fs-sm);
