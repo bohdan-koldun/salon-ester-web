@@ -4,6 +4,7 @@ import { stats, pricing, reviewsSummary } from '../lib/config';
 import { useLeadForm } from '../lib/useLeadForm';
 import { useGooglePlace } from '../lib/useGooglePlace';
 import { plural } from '../lib/plural';
+import { scrollToForm } from '../lib/scroll';
 import MessengerLinks from './MessengerLinks';
 import { LockIcon } from './icons';
 
@@ -58,6 +59,14 @@ const Hero: React.FC = () => {
               ))}
             </ul>
           )}
+          {/* Мобільний: замість форми — кнопка до квізу */}
+          <button
+            type="button"
+            className="btn btn--light btn--lg btn--block hero__cta-mobile"
+            onClick={() => scrollToForm(undefined, 'hero_mobile')}
+          >
+            Розрахувати вартість
+          </button>
           <p className="hero__micro">
             Понад {stats.years} років досвіду · {stats.projects}+ виконаних
             проєктів · власний цех

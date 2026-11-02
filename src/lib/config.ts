@@ -119,7 +119,6 @@ export const services: Service[] = [
     short: 'Класичні штори',
     desc: "Індивідуальний пошив будь-якої складності під ваш стиль та інтер'єр.",
     image: 'service-curtains.png',
-    price: 'від 675 грн/м.п.',
   },
   {
     key: 'roman',
